@@ -1,0 +1,16 @@
+PROJEKT NA STUDIA 
+
+Założenia projektu
+Projekt: Sklep internetowy
+Aplikacja to podstawowy sklep internetowy, który umożliwia użytkownikom rejestracje, logowanie, przeglądanie produktów, dodawanie ich do koszyka, składanie zamówień i realizację płatności online. Projekt obejmuje następujące funkcje:
+1. Przegląd produktów – użytkownicy mogą przeglądać dostępne produkty wraz z opisami, cenami i zdjęciami.
+2. Koszyk – wybrane produkty można dodawać do koszyka i zarządzać ich liczbą przed dokonaniem zakupu.
+3. Proces realizacji zamówienia (Checkout) – użytkownik wprowadza swoje dane i adres wysyłki, a następnie wybiera formę płatności.
+4. Integracja płatności Stripe – po złożeniu zamówienia użytkownik dokonuje płatności kartą w bezpiecznym środowisku Stripe, co umożliwia natychmiastową realizację transakcji.
+5. Rejestracja użytkownika - tworzenie konta użytkownika w celu złożenia zamówienia.
+6. Logowanie użytkownika.
+Cel projektu:
+Celem sklepu internetowego jest zbudowanie funkcjonalnej platformy e-commerce z obsługą płatności online, umożliwiającej realizację zamówień.
+Technologie: PHP, HTML, CSS, JavaScript, Stripe API
+
+ 
