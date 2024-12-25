@@ -1,98 +1,117 @@
-
-<div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
-
-  <div class="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
-    <img class="w-full" alt="image of a girl posing" src="https://i.ibb.co/QMdWfzX/component-image-one.png" />
-    <img class="mt-6 w-full" alt="image of a girl posing" src="https://i.ibb.co/qxkRXSq/component-image-two.png" />
-  </div>
-  <div class="md:hidden">
-    <img class="w-full" alt="image of a girl posing" src="https://i.ibb.co/QMdWfzX/component-image-one.png" />
-    <div class="flex items-center justify-between mt-3 space-x-4 md:space-x-0">
-      <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/cYDrVGh/Rectangle-245.png" />
-      <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/f17NXrW/Rectangle-244.png" />
-      <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/cYDrVGh/Rectangle-245.png" />
-      <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/f17NXrW/Rectangle-244.png" />
-    </div>
-  </div>
-  <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
-    <div class="border-b border-gray-200 pb-6">
-      <p class="text-sm leading-none text-gray-600 dark:text-gray-300 ">Balenciaga Fall Collection</p>
-      <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">Balenciaga Signature Sweatshirt</h1>
-    </div>
-    <div class="py-4 border-b border-gray-200 flex items-center justify-between">
-      <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Colours</p>
-      <div class="flex items-center justify-center">
-        <p class="text-sm leading-none text-gray-600 dark:text-gray-300">Smoke Blue with red accents</p>
-        <div class="w-6 h-6 bg-gradient-to-b from-gray-900 to-indigo-500 ml-3 mr-4 cursor-pointer"></div>
-        <svg class="cursor-pointer text-gray-300 dark:text-white" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
-    </div>
-    <div class="py-4 border-b border-gray-200 flex items-center justify-between">
-      <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Size</p>
-      <div class="flex items-center justify-center">
-        <p class="text-sm leading-none text-gray-600 dark:text-gray-300 mr-3">38.2</p>
-        <svg class="text-gray-300 dark:text-white cursor-pointer" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
-    </div>
-    <button class="dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-gray-800 w-full py-4 hover:bg-gray-700 focus:outline-none">
-      <svg class="mr-3 text-white dark:text-gray-900" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.02301 7.18999C7.48929 6.72386 7.80685 6.12992 7.93555 5.48329C8.06425 4.83666 7.9983 4.16638 7.74604 3.55724C7.49377 2.94809 7.06653 2.42744 6.51835 2.06112C5.97016 1.6948 5.32566 1.49928 4.66634 1.49928C4.00703 1.49928 3.36252 1.6948 2.81434 2.06112C2.26615 2.42744 1.83891 2.94809 1.58665 3.55724C1.33439 4.16638 1.26843 4.83666 1.39713 5.48329C1.52583 6.12992 1.8434 6.72386 2.30968 7.18999L4.66634 9.54749L7.02301 7.18999Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M4.66699 4.83333V4.84166" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M13.69 13.8567C14.1563 13.3905 14.4738 12.7966 14.6025 12.15C14.7312 11.5033 14.6653 10.8331 14.413 10.2239C14.1608 9.61476 13.7335 9.09411 13.1853 8.72779C12.6372 8.36148 11.9926 8.16595 11.3333 8.16595C10.674 8.16595 10.0295 8.36148 9.48133 8.72779C8.93314 9.09411 8.5059 9.61476 8.25364 10.2239C8.00138 10.8331 7.93543 11.5033 8.06412 12.15C8.19282 12.7966 8.51039 13.3905 8.97667 13.8567L11.3333 16.2142L13.69 13.8567Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M11.333 11.5V11.5083" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-      Check availability in store
-    </button>
-    <div>
-      <p class="xl:pr-48 text-base lg:leading-tight leading-normal text-gray-600 dark:text-gray-300 mt-7">It is a long established fact that a reader will be distracted by thereadable content of a page when looking at its layout. The point of usingLorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
-      <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Product Code: 8BN321AF2IF0NYA</p>
-      <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Length: 13.2 inches</p>
-      <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Height: 10 inches</p>
-      <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Depth: 5.1 inches</p>
-      <p class="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">Composition: 100% calf leather, inside: 100% lamb leather</p>
-    </div>
-    <div>
-      <div class="border-t border-b py-4 mt-7 border-gray-200">
-        <div data-menu class="flex justify-between items-center cursor-pointer">
-          <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Shipping and returns</p>
-          <button class="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded" role="button" aria-label="show or hide">
-            <svg class="transform text-gray-300 dark:text-white" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
+<section class="relative">
+        <div class="w-full mx-auto py-5 px-4 sm:px-6 lg:px-0">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2 ">
+                <div class="img">
+                    <div class="img-box h-1/2 max-lg:mx-auto ">
+                        <img src="public/images/products/aluminiowe2.jpeg" alt="Yellow Tropical Printed Shirt image"
+                            class="max-lg:mx-auto lg:ml-auto h-1/2 object-cover">
+                    </div>
+                </div>
+                <div
+                    class="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
+                    <div class="data w-full max-w-xl">
+                        <p class="text-lg font-medium leading-8 text-indigo-600 mb-4">OKNA
+                        </p>
+                        <h2 class="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize">Okno PCV rozwierne + rozwierno-uchylne trzyszybowe </h2>
+                        <div class="flex flex-col sm:flex-row sm:items-center mb-6">
+                            <h6
+                                class="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
+                                1250zł</h6>
+                        </div>
+                        <p class="text-gray-500 text-base font-normal mb-5">
+                        Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.
+                        </p>
+                        <ul class="grid gap-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                                    <path
+                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                <span class="font-normal text-base text-gray-900 ">Najlepszy styl</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                                    <path
+                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                <span class="font-normal text-base text-gray-900 ">Najnowsze technologie</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                                    <path
+                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                <span class="font-normal text-base text-gray-900 ">Materiały najwszej jakości</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                                    <path
+                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                <span class="font-normal text-base text-gray-900 ">Dopasowane rozmiary</span>
+                            </li>
+                        </ul>
+                        <p class="text-gray-900 text-lg leading-8 font-medium mb-4">Rozmiar 1222x1234</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-8">
+                            <div class="flex sm:items-center sm:justify-center w-full">
+                                <button
+                                    class="group py-4 px-6 border border-gray-400 rounded-l-full bg-white transition-all duration-300 hover:bg-gray-50 hover:shadow-sm hover:shadow-gray-300">
+                                    <svg class="stroke-gray-900 group-hover:stroke-black" width="22" height="22"
+                                        viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5 11H5.5" stroke="" stroke-width="1.6" stroke-linecap="round" />
+                                        <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                        <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                                <input type="text"
+                                    class="font-semibold text-gray-900 cursor-pointer text-lg py-[13px] px-6 w-full sm:max-w-[118px] outline-0 border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50"
+                                    placeholder="1">
+                                <button
+                                    class="group py-4 px-6 border border-gray-400 rounded-r-full bg-white transition-all duration-300 hover:bg-gray-50 hover:shadow-sm hover:shadow-gray-300">
+                                    <svg class="stroke-gray-900 group-hover:stroke-black" width="22" height="22"
+                                        viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="#9CA3AF" stroke-width="1.6"
+                                            stroke-linecap="round" />
+                                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="black" stroke-opacity="0.2"
+                                            stroke-width="1.6" stroke-linecap="round" />
+                                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="black" stroke-opacity="0.2"
+                                            stroke-width="1.6" stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button
+                                class="group py-4 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-lg w-full flex items-center justify-center gap-2 transition-all duration-500 hover:bg-indigo-100">
+                                <svg class="stroke-indigo-600 " width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.7394 17.875C10.7394 18.6344 10.1062 19.25 9.32511 19.25C8.54402 19.25 7.91083 18.6344 7.91083 17.875M16.3965 17.875C16.3965 18.6344 15.7633 19.25 14.9823 19.25C14.2012 19.25 13.568 18.6344 13.568 17.875M4.1394 5.5L5.46568 12.5908C5.73339 14.0221 5.86724 14.7377 6.37649 15.1605C6.88573 15.5833 7.61377 15.5833 9.06984 15.5833H15.2379C16.6941 15.5833 17.4222 15.5833 17.9314 15.1605C18.4407 14.7376 18.5745 14.0219 18.8421 12.5906L19.3564 9.84059C19.7324 7.82973 19.9203 6.8243 19.3705 6.16215C18.8207 5.5 17.7979 5.5 15.7522 5.5H4.1394ZM4.1394 5.5L3.66797 2.75"
+                                        stroke="" stroke-width="1.6" stroke-linecap="round" />
+                                </svg>
+                                Dodaj do koszyka</button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button
+                                class="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-400">
+                                Kup Teraz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="hidden pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 dark:text-gray-300" id="sect">You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable</div>
-      </div>
-    </div>
-    <div>
-      <div class="border-b py-4 border-gray-200">
-        <div data-menu class="flex justify-between items-center cursor-pointer">
-          <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Contact us</p>
-          <button class="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded" role="button" aria-label="show or hide">
-            <svg class="transform text-gray-300 dark:text-white" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-        <div class="hidden pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 dark:text-gray-300" id="sect">If you have any questions on how to return your item to us, contact us.</div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-    let elements = document.querySelectorAll("[data-menu]");
-for (let i = 0; i < elements.length; i++) {
-  let main = elements[i];
-  main.addEventListener("click", function () {
-    let element = main.parentElement.parentElement;
-    let andicators = main.querySelectorAll("svg");
-    let child = element.querySelector("#sect");
-    child.classList.toggle("hidden");
-    andicators[0].classList.toggle("rotate-180");
-  });
-}
-</script>
+    </section>
+                                            

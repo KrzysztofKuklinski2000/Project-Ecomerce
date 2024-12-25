@@ -1,56 +1,75 @@
-<nav x-data="{ isOpen: false }" class="relative bg-white shadow dark:bg-gray-800">
-    <div class="container px-6 py-4 mx-auto">
-        <div class="lg:flex lg:items-center lg:justify-between">
-            <div class="flex items-center justify-between">
-                <a href="#" class="flex items-center ">
+<div class="bg-gray-900">
+  <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div class="relative flex grid items-center grid-cols-2 lg:grid-cols-3">
+      <ul class="flex items-center hidden space-x-8 gap-3 lg:flex">
+        <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
+        <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
+        <li><a href="/" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Drewniane</a></li>
+      </ul>
+      <a href="/" aria-label="Company" title="Company" class="inline-flex items-center lg:mx-auto">
+        <img class="w-auto h-6 sm:h-7" src="public/images/logo1.png" alt="">
+        <span class="ml-2 text-xl font-bold tracking-wide text-white uppercase">Company</span>
+      </a>
+      <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
+        <li><a href="/" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
+        <li><a href="/" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="Zarejestruj się" title="Zarejestruj się">Zarejestruj się</a></li>
+      </ul>
+      <!-- Mobile menu -->
+      <div class="ml-auto lg:hidden">
+        <button id="open" aria-label="Open Menu" title="Open Menu" class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline">
+          <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+            <path fill="white" d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"></path>
+            <path fill="white" d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"></path>
+            <path fill="white" d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"></path>
+          </svg>
+        </button>
+        <!-- Mobile menu dropdown  -->
+        <div id="menu" class="absolute top-0 left-0 w-full hidden">
+          <div class="p-5 bg-white border rounded shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <a href="/" aria-label="Company" title="Company" class="inline-flex items-center">
                     <img class="w-auto h-6 sm:h-7" src="public/images/logo1.png" alt="">
-                    <span class="text-white ml-2">COMPANY</span>
+                    <span class="ml-2 text-xl font-bold tracking-wide text-black uppercase">Company</span>
                 </a>
-
-                <!-- Mobile menu button -->
-                <div class="flex lg:hidden">
-                    <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
-                        <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
-                        </svg>
-                
-                        <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
+              </div>
+              <div>
+                <button id="close" aria-label="Close Menu" title="Close Menu" class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                  <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
-
-            <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-            <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
-                <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                    <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Okna Aluminiowe</a>
-                    <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Okna Drewniane</a>
-                    <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Okna PVC</a>
-                    <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"></a>
-                </div>
-
-                <div class="flex justify-center md:block mr-3">
-                    <a class="relative text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300" href="#">
-                        <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-
-                        <span class="absolute top-0 left-0 p-1 text-xs text-white bg-blue-500 rounded-full"></span>
-                    </a>
-                </div>
-
-                <div class="flex items-center mt-4 lg:mt-0">
-
-                    <button type="button" class="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
-                        <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" class="object-cover w-full h-full" alt="avatar">
-                        </div>
-
-                        <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Khatab wedaa</h3>
-                    </button>
-                </div>
-            </div>
+            <nav>
+              <ul class="space-y-4 gap-3 ">
+                <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
+                <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
+                <li><a href="/" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Drwniane</a></li>
+                <li><a href="/" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
+                <li><a href="/" aria-label="Zarejestruj się" title="Zarejestruj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zarejestruj się</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
+      </div>
     </div>
-</nav>
+  </div>
+</div>
+<script>
+    let menuElement = document.querySelector("#menu")
+    let closeElement = document.querySelector("#close")
+    let openElement = document.querySelector("#open")
+
+    closeElement.addEventListener("click", ()=>{
+        menuElement.classList.add("hidden")
+    })
+
+    openElement.addEventListener("click", ()=>{
+        console.log("siema")
+        menuElement.classList.remove("hidden")
+    })
+</script>
