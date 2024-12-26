@@ -14,7 +14,7 @@
       <div class="rounded-lg md:w-2/3">
         
       <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src="public/images/products/drewniane1.png" alt="product-image" class="w-full rounded-lg sm:w-40" />
+          <img src="public/images/products/drewniane1.png" alt="product-image" class="w-auto h-20 sm:h-7  rounded-lg sm:w-40" />
           <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900">Okno Drewniane</h2>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src="public/images/products/aluminiowe2.jpeg" alt="product-image" class="w-full rounded-lg sm:w-40" />
+          <img src="public/images/products/aluminiowe2.jpeg" alt="product-image" class="w-auto h-20 sm:h-7" />
           <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900">Aluminiowe</h2>

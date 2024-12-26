@@ -9,21 +9,18 @@
 </head>
 <body>
     <header>
-        <?php #include_once "components/navigation.php"; ?> 
-        <!-- <?php include_once "components/header.php";?> -->
+        <?php $page != 'sign_up' && $page != 'sign_in' ? include_once "components/navigation.php" : ""?> 
+        
+        <?php $page == 'start' ? include_once "components/header.php" : ''?>
+        <?php $page == 'start' ? include_once "components/category.php" : ''?>
     </header>
     
     <main>
-        <!-- <?php include_once "components/category.php"; ?> -->
-        <!-- <?php include_once "products.php" ?> -->
-        <!-- <?php include_once "shopping_card.php" ?> -->
-        <!-- <?php include_once "product_details.php" ?> -->
-        <!-- <?php include_once "sign_in.php" ?> -->
-         <?php include_once "sign_up.php" ?>
+        <?php $page != 'start' ? include_once $page . ".php" : '' ?>
     </main>
     
 
-    <!-- <?php include_once "components/footer.php"; ?> -->
+    <?php $page != 'sign_up' && $page != 'sign_in' ? include_once "components/footer.php" : ""?>
 
 
 <script src="/node_modules/alpinejs/dist/cdn.min.js" defer></script>

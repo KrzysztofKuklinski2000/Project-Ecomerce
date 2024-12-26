@@ -2,17 +2,17 @@
   <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
     <div class="relative flex grid items-center grid-cols-2 lg:grid-cols-3">
       <ul class="flex items-center hidden space-x-8 gap-3 lg:flex">
-        <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
-        <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
-        <li><a href="/" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Drewniane</a></li>
+        <li><a href="/?page=products" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
+        <li><a href="/?page=products" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
+        <li><a href="/?page=products" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Okna Drewniane</a></li>
       </ul>
       <a href="/" aria-label="Company" title="Company" class="inline-flex items-center lg:mx-auto">
         <img class="w-auto h-6 sm:h-7" src="public/images/logo1.png" alt="">
         <span class="ml-2 text-xl font-bold tracking-wide text-white uppercase">Company</span>
       </a>
       <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
-        <li><a href="/" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
-        <li><a href="/" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="Zarejestruj się" title="Zarejestruj się">Zarejestruj się</a></li>
+        <li><a href="/?page=sign_in" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
+        <li><a href="/?page=sign_up" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="Zarejestruj się" title="Zarejestruj się">Zarejestruj się</a></li>
       </ul>
       <!-- Mobile menu -->
       <div class="ml-auto lg:hidden">
@@ -24,7 +24,7 @@
           </svg>
         </button>
         <!-- Mobile menu dropdown  -->
-        <div id="menu" class="absolute top-0 left-0 w-full hidden">
+        <div id="menu" class="absolute top-0 left-0 w-full hidden z-10">
           <div class="p-5 bg-white border rounded shadow-sm">
             <div class="flex items-center justify-between mb-4">
               <div>
@@ -46,11 +46,11 @@
             </div>
             <nav>
               <ul class="space-y-4 gap-3 ">
-                <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
-                <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
-                <li><a href="/" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Drwniane</a></li>
-                <li><a href="/" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
-                <li><a href="/" aria-label="Zarejestruj się" title="Zarejestruj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zarejestruj się</a></li>
+                <li><a href="/?page=products" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna PCV</a></li>
+                <li><a href="/?page=products" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Aluminiowe</a></li>
+                <li><a href="/?page=products" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Okna Drwniane</a></li>
+                <li><a href="/?page=sign_in" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
+                <li><a href="/?page=sign_up" aria-label="Zarejestruj się" title="Zarejestruj się" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-teal-accent-400">Zarejestruj się</a></li>
               </ul>
             </nav>
           </div>
