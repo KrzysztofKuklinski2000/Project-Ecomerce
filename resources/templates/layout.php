@@ -9,18 +9,18 @@
 </head>
 <body>
     <header>
-        <?php $page != 'sign_up' && $page != 'sign_in' ? include_once "components/navigation.php" : ""?> 
+        <?php $params['page'] != 'sign_up' && $params['page'] != 'sign_in' ? include_once "components/navigation.php" : ""?> 
         
-        <?php $page == 'start' ? include_once "components/header.php" : ''?>
-        <?php $page == 'start' ? include_once "components/category.php" : ''?>
+        <?php $params['page'] == 'start' ? include_once "components/header.php" : ''?>
+        <?php $params['page'] == 'start' ? include_once "components/category.php" : ''?>
     </header>
     
     <main>
-        <?php $page != 'start' ? include_once $page . ".php" : '' ?>
+        <?php $params['page'] != 'start' ? include_once $params['page'] . ".php" : '' ?>
     </main>
     
 
-    <?php $page != 'sign_up' && $page != 'sign_in' ? include_once "components/footer.php" : ""?>
+    <?php $params['page'] != 'sign_up' && $params['page'] != 'sign_in' ? include_once "components/footer.php" : ""?>
 
 
 <script src="/node_modules/alpinejs/dist/cdn.min.js" defer></script>

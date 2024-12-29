@@ -6,6 +6,9 @@ use App\Controllers\controller;
 use App\Request;
 
 // Uruchomienie kontrolera
+$config  = require_once('config/config.php');
+
+controller::initConfiguration($config);
 $request = new Request($_GET);
 $controller = new controller($request);
 $controller->run();
