@@ -1,25 +1,29 @@
+<?php 
+$content = $params['content'];
+?>
+
 <section class="relative">
         <div class="w-full mx-auto py-5 px-4 sm:px-6 lg:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2 ">
                 <div class="img">
-                    <div class="img-box h-1/2 max-lg:mx-auto ">
-                        <img src="public/images/products/aluminiowe2.jpeg" alt="Yellow Tropical Printed Shirt image"
-                            class="max-lg:mx-auto lg:ml-auto h-1/2 object-cover">
+                    <div class="img-box h-full max-lg:mx-auto ">
+                        <img src="public/images/products/<?php echo $content['image_url'] ?>" alt="Okno"
+                            class="max-lg:mx-auto lg:ml-auto h-1/3 object-cover">
                     </div>
                 </div>
                 <div
                     class="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
                     <div class="data w-full max-w-xl">
-                        <p class="text-lg font-medium leading-8 text-indigo-600 mb-4">OKNA
+                        <p class="text-lg font-medium leading-8 text-indigo-600 mb-4"><?php echo ucwords(str_replace("_", " ", $content['categoryName'])) ?>
                         </p>
-                        <h2 class="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize">Okno PCV rozwierne + rozwierno-uchylne trzyszybowe </h2>
+                        <h2 class="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize"><?php echo $content['name'] ?></h2>
                         <div class="flex flex-col sm:flex-row sm:items-center mb-6">
                             <h6
                                 class="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
-                                1250zł</h6>
+                                <?php echo $content['price'] ?> zł</h6>
                         </div>
                         <p class="text-gray-500 text-base font-normal mb-5">
-                        Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.
+                            <?php echo $content['description'] ?>
                         </p>
                         <ul class="grid gap-y-4 mb-8">
                             <li class="flex items-center gap-3">
@@ -63,7 +67,7 @@
                                 <span class="font-normal text-base text-gray-900 ">Dopasowane rozmiary</span>
                             </li>
                         </ul>
-                        <p class="text-gray-900 text-lg leading-8 font-medium mb-4">Rozmiar 1222x1234</p>
+                        <p class="text-gray-900 text-lg leading-8 font-medium mb-4">Rozmiar <?php echo $content['size'] ?></p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-8">
                             <div class="flex sm:items-center sm:justify-center w-full">
                                 <button

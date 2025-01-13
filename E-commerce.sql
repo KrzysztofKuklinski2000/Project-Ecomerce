@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 26, 2024 at 07:37 PM
+-- Generation Time: Sty 13, 2025 at 10:08 PM
 -- Wersja serwera: 8.0.35
 -- Wersja PHP: 8.2.20
 
@@ -24,14 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `categories`
 --
 
 CREATE TABLE `categories` (
   `id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `created_at` date DEFAULT NULL
+  `name` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
+(1, 'okna_aluminiowe', '2025-01-13 20:51:52'),
+(2, 'okna_drewniane', '2025-01-13 20:51:52'),
+(3, 'okna_pcv', '2025-01-13 20:51:59');
 
 -- --------------------------------------------------------
 
@@ -41,10 +64,10 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `orders` (
   `id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `status` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `total_price` float DEFAULT NULL,
-  `created_at` date DEFAULT NULL
+  `user_id` int NOT NULL,
+  `status` enum('pending','completed','cancelled') COLLATE utf8mb4_polish_ci DEFAULT 'pending',
+  `total_price` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -55,10 +78,11 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `order_items` (
   `id` int NOT NULL,
-  `order_id` int DEFAULT NULL,
-  `product_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `price` int NOT NULL
+  `order_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -69,11 +93,11 @@ CREATE TABLE `order_items` (
 
 CREATE TABLE `payments` (
   `id` int NOT NULL,
-  `order_id` int DEFAULT NULL,
-  `payment_method` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `status` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `amount` float DEFAULT NULL,
-  `created_at` date DEFAULT NULL
+  `order_id` int NOT NULL,
+  `payment_method` enum('credit_card','paypal') COLLATE utf8mb4_polish_ci NOT NULL DEFAULT 'credit_card',
+  `status` enum('success','failed') COLLATE utf8mb4_polish_ci DEFAULT 'success',
+  `amount` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -84,28 +108,28 @@ CREATE TABLE `payments` (
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
   `description` text COLLATE utf8mb4_polish_ci,
-  `price` float DEFAULT NULL,
-  `stock` int DEFAULT NULL,
-  `product_size` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `image_url` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `size` varchar(20) COLLATE utf8mb4_polish_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `stock` int NOT NULL DEFAULT '0',
   `category_id` int DEFAULT NULL,
-  `created_at` date DEFAULT NULL
+  `image_url` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `product_size`, `image_url`, `category_id`, `created_at`) VALUES
-(1, 'ALUMINIOWE MODEL-1', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.', 1250, 10, '1222x1234', 'aluminiowe1.webp', 1, '2024-12-26'),
-(2, 'ALUMINIOWE MODEL-2\r\n', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.', 2100, 21, '1222x1234', 'aluminiowe2.jpeg', 1, '2024-12-26'),
-(3, 'DREWNIANE MODEL-1', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.', 1100, 3, '1234x1123', 'drewniane1.png', 2, '2024-12-26'),
-(4, 'DREWNIANE MODEL-2', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.\r\n', 1800, 22, '1100x600', 'drewniane2.jpeg', 2, '2024-12-26'),
-(5, 'DREWNIANE MODEL-3', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.\r\n', 2400, 82, '300x1200', 'drewniane3.png', 2, '2024-12-26'),
-(6, 'PCV MODEL-1', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.', 2400, 21, '1100x1300', 'pcv.png', 0, '2024-12-26'),
-(7, 'PCV MODEL-2', 'Odkryj nową generację okien PVC z trzema szybami, oferującą doskonałą izolację cieplną (U=0.9W/m²K) i akustyczną (31dB). Zaprojektowane z myślą o wygodzie, nasze okna otwierają się rozwierno-uchylnie, a solidna konstrukcja (81mm grubości stelaża) oraz wysoka jakość PVC i szkła gwarantują trwałość i odporność na warunki atmosferyczne.', 3200, 22, '2000x1000', 'pcv2.jpeg', 0, '2024-12-26');
+INSERT INTO `products` (`id`, `name`, `description`, `size`, `price`, `stock`, `category_id`, `image_url`, `created_at`) VALUES
+(2, 'Aluminiowe-Model-1', 'Okno Alumiowe, trwała konstrukcja wykonana z najlepszego materiału.', '1222x1222', 1234.00, 10, 1, 'aluminiowe1.webp', '2025-01-13 20:52:52'),
+(3, 'Aluminiowe-Model-2', 'Okno Alumiowe, trwała konstrukcja wykonana z najlepszego materiału.', '1200x1200', 1000.00, 20, 1, 'aluminiowe2.jpeg', '2025-01-13 20:55:12'),
+(4, 'Drewniane-Model-1', 'Okno drewniane, trwała konstrukcja wykonana z najlepszego materiału.', '1000x1000', 2000.00, 50, 2, 'drewniane1.png', '2025-01-13 20:57:23'),
+(5, 'Drewniane-Model-2', 'Okno drewniane, trwała konstrukcja wykonana z najlepszego materiału.', '500x500', 300.00, 100, 2, 'drewniane2.jpeg', '2025-01-13 20:57:23'),
+(6, 'Drewniane-Model-3', 'Okno drewniane, trwała konstrukcja wykonana z najlepszego materiału.', '600x800', 600.00, 20, 2, 'drewniane3.png', '2025-01-13 20:58:14'),
+(7, 'PCV-Model-1', 'Okno pcv, trwała konstrukcja wykonana z najlepszego materiału.', '1200x800', 1300.00, 5, 3, 'pcv.png', '2025-01-13 21:00:00'),
+(8, 'PCV-Model-2', 'Okno pcv, trwała konstrukcja wykonana z najlepszego materiału.', '1500x1200', 1200.00, 20, 3, 'pcv2.jpeg', '2025-01-13 21:00:00');
 
 -- --------------------------------------------------------
 
@@ -115,15 +139,30 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `product_
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `created_at` date DEFAULT NULL
+  `name` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_polish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
+(1, 'Krzysztof', 'test@gmail.com', '1231234', '2025-01-13 20:52:28');
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_cart_user` (`user_id`),
+  ADD KEY `fk_cart_product` (`product_id`);
 
 --
 -- Indeksy dla tabeli `categories`
@@ -136,45 +175,52 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_orders_user` (`user_id`);
 
 --
 -- Indeksy dla tabeli `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `fk_order_items_order` (`order_id`),
+  ADD KEY `fk_order_items_product` (`product_id`);
 
 --
 -- Indeksy dla tabeli `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
+  ADD KEY `fk_payments_order` (`order_id`);
 
 --
 -- Indeksy dla tabeli `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `fk_products_category` (`category_id`);
 
 --
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -198,13 +244,49 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_cart_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_order_items_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `fk_payments_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_products_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

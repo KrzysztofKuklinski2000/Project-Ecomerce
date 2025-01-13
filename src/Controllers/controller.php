@@ -43,11 +43,13 @@ class controller {
     }
 
     public function productsAction():void {
-        $this->view->renderView(['page' => 'products', 'content' => $this->model->GetProducts()]);
+        $category = $this->request->get('category');
+        $this->view->renderView(['page' => 'products', 'content' => $this->model->GetProducts($category)]);
     }
     
     public function product_detailsAction(): void {
-        $this->view->renderView(['page' => 'product_details']);
+        $id = (int) $this->request->get('id') ?? 1;
+        $this->view->renderView(['page' => 'product_details', 'content' => $this->model->GetProductDetails($id)]);
     }
 
     public function shopping_cardAction(): void {
