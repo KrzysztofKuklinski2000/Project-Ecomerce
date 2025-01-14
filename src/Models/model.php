@@ -52,4 +52,14 @@ class Model {
             throw new Exception("Nie udało się pobrać produktu", 400, $e);
         }
     }
+
+    public function AddProductToCart(array $cartData) {
+        try {
+
+            $sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES('$cartData[userId]', '$cartData[productId]', '$cartData[quantity]')";
+            $this->conn->exec($sql);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się dodać produktu do koszyka"); 
+        }
+    }
 }

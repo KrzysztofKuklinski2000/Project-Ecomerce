@@ -9,6 +9,6 @@ use App\Request;
 $config  = require_once('config/config.php');
 
 controller::initConfiguration($config);
-$request = new Request($_GET);
+$request = new Request($_GET, $_POST, $_SERVER);
 $controller = new controller($request);
 $controller->run();

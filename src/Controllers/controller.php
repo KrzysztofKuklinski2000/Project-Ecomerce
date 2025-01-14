@@ -43,6 +43,17 @@ class controller {
     }
 
     public function productsAction():void {
+        if($this->request->isPost()) {
+            $productId = $this->request->post("product_id");
+
+            $data = [
+                'userId' => 1, 
+                'productId' => $productId,
+                'quantity' => 1
+            ];
+            $this->model->AddProductToCart($data);
+        }
+
         $category = $this->request->get('category');
         $this->view->renderView(['page' => 'products', 'content' => $this->model->GetProducts($category)]);
     }

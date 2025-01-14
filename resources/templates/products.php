@@ -15,8 +15,11 @@
                                 <h3 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase "><?php echo $content['name']?></h3>
 
                                 <div class="flex items-center justify-between px-3 py-2 bg-gray-200 ">
-                                    <span class="font-bold text-gray-800 "><?php echo $content['price']?>zł</span> 
-                                    <button class="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700  focus:bg-gray-700 focus:outline-none">Do Koszyka</button>
+                                    <span class="font-bold text-gray-800 "><?php echo $content['price']?>zł</span>
+                                    <form class="flex items-center justify-between px-3 py-2 bg-gray-200" action="/?page=products" method="POST">
+                                        <input type="hidden" name="product_id" value="<?php echo $content['id'] ?>">
+                                        <button type="submit" class="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700  focus:bg-gray-700 focus:outline-none">Do Koszyka</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
