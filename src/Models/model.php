@@ -47,10 +47,16 @@ class Model {
             WHERE products.id = $id";
             $result = $this->conn->query($sql);
 
-            return $result->fetch(PDO::FETCH_ASSOC);
+            $product = $result->fetch(PDO::FETCH_ASSOC);
         }catch(Throwable $e) {
             throw new Exception("Nie udało się pobrać produktu", 400, $e);
         }
+
+        if(!$product) {
+            throw new Exception("Nie znaleziono produktu");
+        }
+
+        return $product;
     }
 
     public function GetUserCart(int $userId): array {

@@ -28,11 +28,15 @@ class controller {
     }
 
     public function run(): void {
-        $page = $this->page()."Action";
-        if(!method_exists($this, $page)){
-            $page = self::DEFAULT_PAGE."Action";
-        }
-        $this->$page();
+        try {
+            $page = $this->page()."Action";
+            if(!method_exists($this, $page)){
+                $page = self::DEFAULT_PAGE."Action";
+            }
+            $this->$page();
+       }catch(Exception $e) {
+            $this->startAction();
+       }
     }
 
     public function page(): string {
