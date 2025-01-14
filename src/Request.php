@@ -5,7 +5,7 @@ namespace App;
 
 class Request {
     private array $get = [];
-    private array $post = [];
+    public array $post = [];
     private array $server = [];
     
     public function __construct(array $get, array $post, array $server) {

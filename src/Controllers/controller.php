@@ -47,7 +47,7 @@ class controller {
             $productId = $this->request->post("product_id");
 
             $data = [
-                'userId' => 1, 
+                'userId' => 2, 
                 'productId' => $productId,
                 'quantity' => 1
             ];
@@ -63,8 +63,14 @@ class controller {
         $this->view->renderView(['page' => 'product_details', 'content' => $this->model->GetProductDetails($id)]);
     }
 
-    public function shopping_cardAction(): void {
-        $this->view->renderView(['page' => 'shopping_card']);
+    public function shopping_cartAction(): void {
+        $userId = 2;
+        if($this->request->isPost()) {
+            $cartId = (int) $this->request->post("cartId");
+            $this->model->DeleteProductFromCart($cartId);
+        }
+        
+        $this->view->renderView(['page' => 'shopping_cart', 'content' => $this->model->GetUserCart($userId)]);
     }
 
     public function sign_inAction():void {
