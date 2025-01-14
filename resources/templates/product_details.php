@@ -70,7 +70,7 @@ $content = $params['content'];
                         <p class="text-gray-900 text-lg leading-8 font-medium mb-4">Rozmiar <?php echo $content['size'] ?></p>
                             <form class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-8" method="POST" action="/?page=product_details&id=<?php echo $content['id'] ?>">
                                 <div class="flex sm:items-center sm:justify-center w-full">
-                                    <button
+                                    <div id="quantityMinus"
                                         class="group py-4 px-6 border border-gray-400 rounded-l-full bg-white transition-all duration-300 hover:bg-gray-50 hover:shadow-sm hover:shadow-gray-300">
                                         <svg class="stroke-gray-900 group-hover:stroke-black" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +80,11 @@ $content = $params['content'];
                                             <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
                                                 stroke-linecap="round" />
                                         </svg>
-                                    </button>
-                                    <input type="text" name="quantity"
+                                    </div>
+                                    <input type="text" name="quantity" id="quantity" value="1"
                                         class="font-semibold text-gray-900 cursor-pointer text-lg py-[13px] px-6 w-full sm:max-w-[118px] outline-0 border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50"
                                         placeholder="1">
-                                    <button
+                                    <div id="quantityPlus"
                                         class="group py-4 px-6 border border-gray-400 rounded-r-full bg-white transition-all duration-300 hover:bg-gray-50 hover:shadow-sm hover:shadow-gray-300">
                                         <svg class="stroke-gray-900 group-hover:stroke-black" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@ $content = $params['content'];
                                             <path d="M11 5.5V16.5M16.5 11H5.5" stroke="black" stroke-opacity="0.2"
                                                 stroke-width="1.6" stroke-linecap="round" />
                                         </svg>
-                                    </button>
+                                    </div>
                                 </div>
                                 <input type="hidden" name="product_id" value="<?php echo $content['id'] ?>">
                                 <button type="submit"
@@ -119,4 +119,19 @@ $content = $params['content'];
             </div>
         </div>
     </section>
+<script>
+    let quantityPlus = document.getElementById("quantityPlus");
+    let quantityMinus = document.getElementById("quantityMinus");
+    let quantityInput = document.getElementById("quantity");
+
+
+    quantityPlus.addEventListener('click', ()=>{
+        quantityInput.value ++;
+    }, false)
+
+    quantityMinus.addEventListener('click', ()=>{
+        if(quantityInput.value <= 1) return;
+        quantityInput.value -= 1;
+    }, false)
+</script>
                                             

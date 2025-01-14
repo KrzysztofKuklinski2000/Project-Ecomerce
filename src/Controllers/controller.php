@@ -58,7 +58,8 @@ class controller {
         }
 
         if($this->request->isPost()) {
-           $this->AddProductToCart();
+            $quantity = (int) $this->request->post("quantity");
+            $this->AddProductToCart($quantity);
         }
 
         $this->view->renderView(['page' => 'product_details', 'content' => $this->model->GetProductDetails($id)]);
@@ -93,13 +94,13 @@ class controller {
         return $total_amount;
     }
 
-    public function AddProductToCart() {
-        $productId = $this->request->post("product_id");
-
+    public function AddProductToCart(int $quantity = 1) {
+            $productId = $this->request->post("product_id");
+            if($quantity == 0) $quantity = 1; 
             $data = [
                 'userId' => 1, 
                 'productId' => $productId,
-                'quantity' => 1
+                'quantity' => $quantity
             ];
             $this->model->AddProductToCart($data);
     }
