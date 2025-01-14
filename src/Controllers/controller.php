@@ -44,14 +44,7 @@ class controller {
 
     public function productsAction():void {
         if($this->request->isPost()) {
-            $productId = $this->request->post("product_id");
-
-            $data = [
-                'userId' => 2, 
-                'productId' => $productId,
-                'quantity' => 1
-            ];
-            $this->model->AddProductToCart($data);
+            $this->AddProductToCart();
         }
 
         $category = $this->request->get('category');
@@ -59,18 +52,29 @@ class controller {
     }
     
     public function product_detailsAction(): void {
-        $id = (int) $this->request->get('id') ?? 1;
+        $id = (int) $this->request->get('id');
+        if(!$id) {
+            $this->startAction();
+        }
+
+        if($this->request->isPost()) {
+           $this->AddProductToCart();
+        }
+
         $this->view->renderView(['page' => 'product_details', 'content' => $this->model->GetProductDetails($id)]);
     }
 
     public function shopping_cartAction(): void {
-        $userId = 2;
+        $userId = 1;
         if($this->request->isPost()) {
             $cartId = (int) $this->request->post("cartId");
             $this->model->DeleteProductFromCart($cartId);
         }
-        
-        $this->view->renderView(['page' => 'shopping_cart', 'content' => $this->model->GetUserCart($userId)]);
+
+        $content = $this->model->GetUserCart($userId);
+        $total_amount = $this->GetTotalAmount($content);
+
+        $this->view->renderView(['page' => 'shopping_cart', 'content' => $content, 'total_amount' => $total_amount]);
     }
 
     public function sign_inAction():void {
@@ -79,5 +83,24 @@ class controller {
 
     public function sign_upAction(): void {
         $this->view->renderView(['page' => 'sign_up']);
+    }
+
+    public function GetTotalAmount(array $content): float {
+        $total_amount = 0;
+        foreach($content as $el) {
+            $total_amount += $el['total_amount'];
+        }
+        return $total_amount;
+    }
+
+    public function AddProductToCart() {
+        $productId = $this->request->post("product_id");
+
+            $data = [
+                'userId' => 1, 
+                'productId' => $productId,
+                'quantity' => 1
+            ];
+            $this->model->AddProductToCart($data);
     }
 }

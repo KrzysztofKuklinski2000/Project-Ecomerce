@@ -53,13 +53,13 @@
           </div>
           <div class="flex justify-between">
             <p class="text-gray-700">Dostawa:</p>
-            <p class="text-gray-700">150zł</p>
+            <p class="text-gray-700">0zł</p>
           </div>
           <hr class="my-4" />
           <div class="flex justify-between">
             <p class="text-lg font-bold">Razem</p>
             <div class="">
-              <p class="mb-1 text-lg font-bold">3350zł</p>
+              <p class="mb-1 text-lg font-bold"><?php echo $params['total_amount']?>zł</p>
               <p class="text-sm text-gray-700">z VAT</p>
             </div>
           </div>

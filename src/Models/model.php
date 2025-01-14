@@ -55,7 +55,7 @@ class Model {
 
     public function GetUserCart(int $userId): array {
         try {
-            $sql = "SELECT 
+            $sql = "SELECT SUM(cart.quantity * products.price) AS total_amount,
                     products.id AS productId, products.name AS productName, products.price AS productPrice, products.stock AS productStock, products.image_url AS productImageUrl, products.size AS productSize,
                     users.id AS userId, users.name AS userName, users.email AS userEmail,
                     cart.id,
@@ -64,6 +64,18 @@ class Model {
                     INNER JOIN products ON cart.product_id = products.id
                     INNER JOIN users ON cart.user_id = users.id
                     WHERE cart.user_id = $userId
+                    GROUP BY 
+                        products.id, 
+                        products.name, 
+                        products.price, 
+                        products.stock, 
+                        products.image_url, 
+                        products.size, 
+                        users.id, 
+                        users.name, 
+                        users.email, 
+                        cart.id, 
+                        cart.quantity
                     ";
             $result = $this->conn->query($sql);
             return $result->fetchAll(PDO::FETCH_ASSOC);
