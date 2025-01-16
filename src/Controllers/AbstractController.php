@@ -7,6 +7,7 @@ use App\Request;
 use App\Models\Model;
 use App\Models\UserModel;
 use Exception;
+use App\Validator;
 
 abstract class AbstractController {
     protected const DEFAULT_PAGE = 'start';
@@ -14,6 +15,7 @@ abstract class AbstractController {
     public Request $request;
     public Model $model;
     public UserModel $userModel;
+    public Validator $validator;
     private static array $configuration = [];
 
     public static function initConfiguration(array $configuration) {
@@ -29,6 +31,7 @@ abstract class AbstractController {
         $this->userModel = new UserModel(self::$configuration['db']);
         $this->view = new view();
         $this->request = $request;
+        $this->validator = new Validator();
     }
 
     public function run(): void {

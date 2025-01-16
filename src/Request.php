@@ -20,6 +20,10 @@ class Request {
         return $this->server['REQUEST_METHOD'] === "POST";
     }
 
+    public function hasPost(): bool {
+        return !empty($this->post);
+    }
+
     public function get(string $param, $default = null) {
         return $this->get[$param] ?? $default;
     }
