@@ -8,18 +8,7 @@ use PDOException;
 use Exception;
 
 
-class Model {
-    protected PDO $conn;
-
-    public function __construct(array $config) {
-        try{
-            $dns = "mysql:dbname={$config['database']};host={$config['host']}";
-            $this->conn = new PDO($dns, $config['user'], $config['password'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        }catch(PDOException $e) {
-            throw new Exception("Błąd połączenia z baza danych");
-        }
-    }
-
+class Model extends AbstractModel  {
     public function GetProducts(?string $category): array {
         try {
             $sql = "";
@@ -111,4 +100,5 @@ class Model {
             throw new Exception("Nie udało się usunąć elementu z koszyka");
         }
     }
+
 }

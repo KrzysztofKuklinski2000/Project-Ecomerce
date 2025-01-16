@@ -5,40 +5,9 @@ namespace App\Controllers;
 use App\Views\view;
 use App\Request;
 use App\Models\Model;
-use Exception;
+use App\Models\UserModel;
 
-class controller {
-    protected const DEFAULT_PAGE = 'start';
-    public view $view;
-    public Request $request;
-    public Model $model;
-    private static array $configuration = [];
-
-    public static function initConfiguration(array $configuration) {
-        self::$configuration = $configuration;
-    }
-
-    public function __construct(Request $request) {
-        if(empty(self::$configuration['db'])){
-            throw new Exception("Błąd Konfiguracji");
-        }
-        $this->model = new Model(self::$configuration['db']);
-        $this->view = new view();
-        $this->request = $request;
-    }
-
-    public function run(): void {
-        try {
-            $page = $this->page()."Action";
-            if(!method_exists($this, $page)){
-                $page = self::DEFAULT_PAGE."Action";
-            }
-            $this->$page();
-       }catch(Exception $e) {
-            $this->startAction();
-       }
-    }
-
+class controller extends UserController {
     public function page(): string {
         return $this->request->get('page', self::DEFAULT_PAGE);
     }
@@ -80,14 +49,6 @@ class controller {
         $total_amount = $this->GetTotalAmount($content);
 
         $this->view->renderView(['page' => 'shopping_cart', 'content' => $content, 'total_amount' => $total_amount]);
-    }
-
-    public function sign_inAction():void {
-        $this->view->renderView(['page' => 'sign_in']);
-    }
-
-    public function sign_upAction(): void {
-        $this->view->renderView(['page' => 'sign_up']);
     }
 
     public function GetTotalAmount(array $content): float {

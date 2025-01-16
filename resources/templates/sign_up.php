@@ -1,6 +1,6 @@
 <section class="bg-white mt-20">
     <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-        <form class="w-full max-w-md">
+        <form class="w-full max-w-md" action="/?page=sign_up" method="POST">
             <a href="/">
                 <div class="flex justify-center mx-auto">
                     <img class="w-auto h-7 sm:h-8" src="public/images/logo1.png" alt="">
@@ -24,7 +24,7 @@
                     </svg>
                 </span>
 
-                <input type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nazwa uzytkownika">
+                <input name="user_name" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nazwa uzytkownika">
             </div>
 
             <div class="relative flex items-center mt-6">
@@ -34,7 +34,7 @@
                     </svg>
                 </span>
 
-                <input type="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11  focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="E-mail">
+                <input name="email" type="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11  focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="E-mail">
             </div>
 
             <div class="relative flex items-center mt-4">
@@ -44,7 +44,7 @@
                     </svg>
                 </span>
 
-                <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Hasło">
+                <input name="password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Hasło">
             </div>
 
             <div class="relative flex items-center mt-4">
@@ -53,8 +53,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </span>
-
-                <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Powtórz hasło">
+                
+                <input name="confirm_password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Powtórz hasło">
             </div>
 
             <div class="mt-6">
