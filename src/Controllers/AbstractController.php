@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Views\view;
 use App\Request;
-use App\Models\Model;
+use App\Models\StoreModel;
 use App\Models\UserModel;
 use Exception;
 use App\Validator;
@@ -13,7 +13,7 @@ abstract class AbstractController {
     protected const DEFAULT_PAGE = 'start';
     public view $view;
     public Request $request;
-    public Model $model;
+    public StoreModel $model;
     public UserModel $userModel;
     public Validator $validator;
     private static array $configuration = [];
@@ -27,7 +27,7 @@ abstract class AbstractController {
             throw new Exception("Błąd Konfiguracji");
         }
         
-        $this->model = new Model(self::$configuration['db']);
+        $this->model = new StoreModel(self::$configuration['db']);
         $this->userModel = new UserModel(self::$configuration['db']);
         $this->view = new view();
         $this->request = $request;
