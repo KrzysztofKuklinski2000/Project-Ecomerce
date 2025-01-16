@@ -66,6 +66,11 @@ class UserController extends AbstractController {
         $this->view->renderView(['page' => 'sign_up']);
     }
 
+    public function logoutAction(): void {
+        session_destroy();
+        header("Location: /?page=start");
+    }  
+
     public function shopping_cartAction(): void {
         if(empty($this->request->session('user'))) header("Location:/?page=start");
         $userId = $this->request->session('user')['id'];
@@ -104,12 +109,11 @@ class UserController extends AbstractController {
     public function orderAction():void{
         $content = $this->userModel->GetUserCart($this->request->session('user')['id']);
         $total_amount = $this->GetTotalAmount($content);
-        print_r($content);
-        exit();
-    }
 
-    public function logoutAction(): void {
-        session_destroy();
-        header("Location: /?page=start");
-    }    
+        if($this->request->isPost()) {
+            print_r($this->request->post);
+        }
+
+        $this->view->renderView(['page' => 'order', 'content' => $content, 'total_amount' => $total_amount]);
+    }  
 }   
