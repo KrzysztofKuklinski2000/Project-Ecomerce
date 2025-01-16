@@ -24,6 +24,7 @@ abstract class AbstractController {
         if(empty(self::$configuration['db'])){
             throw new Exception("Błąd Konfiguracji");
         }
+        
         $this->model = new Model(self::$configuration['db']);
         $this->userModel = new UserModel(self::$configuration['db']);
         $this->view = new view();

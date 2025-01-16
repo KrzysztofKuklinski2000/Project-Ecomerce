@@ -22,6 +22,7 @@ class UserController extends AbstractController {
             ];
 
             $this->userModel->create($data);
+            
         }
 
         $this->view->renderView(['page' => 'sign_up']);
