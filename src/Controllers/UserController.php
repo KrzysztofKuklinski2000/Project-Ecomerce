@@ -16,9 +16,22 @@ class UserController extends AbstractController {
 
     //Login
     public function sign_inAction():void {
-        
- 
-        $this->view->renderView(['page' => 'sign_in']);
+        $error = [];
+        if($this->request->hasPost()) {
+            $email = $this->request->post('email');
+            $password = $this->request->post('password');
+            if($this->userModel->getByEmail($email) !== 0) {
+                $user = $this->userModel->getUser($email);
+                if(password_verify($password, $user['password'])) {
+                    $_SESSION['user'] = $user;
+                    header("Location: /?page=start");
+                }else {
+                    $error['loginError'] = "Nie poprawne hasło";
+                }
+
+            }else $error['loginError'] = "Nie poprawny E-mail";
+        }
+        $this->view->renderView(['page' => 'sign_in'], $error);
     }
     //Register
     public function sign_upAction(): void {
@@ -53,6 +66,8 @@ class UserController extends AbstractController {
         $this->view->renderView(['page' => 'sign_up']);
     }
 
-
-    
-}
+    public function logoutAction(): void {
+        session_destroy();
+        header("Location: /?page=start");
+    }    
+}   

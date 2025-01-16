@@ -8,10 +8,12 @@ use App\Models\Model;
 use App\Models\UserModel;
 
 class controller extends UserController {
-    public function page(): string {
-        return $this->request->get('page', self::DEFAULT_PAGE);
-    }
+    
     public function startAction(): void {
+        if($this->request->session('user')){
+            
+            exit();
+        }
         $this->view->renderView(['page' => 'start']);
     }
 

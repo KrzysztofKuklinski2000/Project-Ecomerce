@@ -32,7 +32,7 @@ class Request {
         return $this->post[$param] ?? $default;
     }
 
-    public function session(string $param, $defalut = null) {
+    public function session(string $param, $default = null) {
         return $this->session[$param] ?? $default;
     }
 

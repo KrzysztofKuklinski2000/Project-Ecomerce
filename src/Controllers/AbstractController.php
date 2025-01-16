@@ -45,4 +45,8 @@ abstract class AbstractController {
             $this->startAction();
        }
     }
+    
+    public function page(): string {
+        return $this->request->get('page', self::DEFAULT_PAGE);
+    }
 }

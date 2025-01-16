@@ -24,6 +24,19 @@ class UserModel extends AbstractModel {
         }
     }
 
+    public function getUser(string $email): array {
+        try {
+            $Email = $this->conn->quote($email);
+
+            $sql = "SELECT * FROM users WHERE email = $Email LIMIT 1";
+            $result = $this->conn->query($sql);
+            return $result->fetch(PDO::FETCH_ASSOC);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się pobrać uytkownika");
+        }
+    }
+
+
     public function getByEmail(string $email): int {
         try {
             $Email = $this->conn->quote($email);
