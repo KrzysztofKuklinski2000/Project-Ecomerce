@@ -12,9 +12,14 @@
         <span class="ml-2 text-xl font-bold tracking-wide text-white uppercase">Company</span>
       </a>
       <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
-        <li><a href="/?page=sign_in" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
-        <li><a href="/?page=sign_up" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="Zarejestruj się" title="Zarejestruj się">Zarejestruj się</a></li>
-      </ul>
+        <?php if(empty($_SESSION['user'])): ?>
+          <li><a href="/?page=sign_in" aria-label="Zaloguj się" title="Zaloguj się" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Zaloguj się</a></li>
+          <li><a href="/?page=sign_up" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="Zarejestruj się" title="Zarejestruj się">Zarejestruj się</a></li>
+        <?php else: ?>
+          <li><a href="/?page=shopping_cart" aria-label="Koszyk" title="Koszyk" class="font-medium tracking-wide text-white transition-colors duration-200 hover:text-teal-accent-400">Koszyk</a></li>
+          <li><a href="/?page=logout" class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none" aria-label="logout" title="logout">Wyloguj się</a></li>
+        <?php endif; ?>
+        </ul>
       <!-- Mobile menu -->
       <div class="ml-auto lg:hidden">
         <button id="open" aria-label="Open Menu" title="Open Menu" class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline">

@@ -10,10 +10,6 @@ use App\Models\UserModel;
 class controller extends UserController {
     
     public function startAction(): void {
-        if($this->request->session('user')){
-            
-            exit();
-        }
         $this->view->renderView(['page' => 'start']);
     }
 
@@ -41,7 +37,8 @@ class controller extends UserController {
     }
 
     public function shopping_cartAction(): void {
-        $userId = 1;
+        if(empty($this->request->session('user'))) header("Location:/?page=start");
+        $userId = $this->request->session('user')['id'];
         if($this->request->isPost()) {
             $cartId = (int) $this->request->post("cartId");
             $this->model->DeleteProductFromCart($cartId);
@@ -54,6 +51,7 @@ class controller extends UserController {
     }
 
     public function GetTotalAmount(array $content): float {
+        if(empty($this->request->session('user'))) header("Location: /?page=start");
         $total_amount = 0;
         foreach($content as $el) {
             $total_amount += $el['total_amount'];
@@ -62,13 +60,21 @@ class controller extends UserController {
     }
 
     public function AddProductToCart(int $quantity = 1) {
+            if(empty($this->request->session('user'))) header("Location: /?page=products");
             $productId = $this->request->post("product_id");
             if($quantity == 0) $quantity = 1; 
             $data = [
-                'userId' => 1, 
+                'userId' => $this->request->session('user')['id'],
                 'productId' => $productId,
                 'quantity' => $quantity
             ];
             $this->model->AddProductToCart($data);
+    }
+
+    public function orderAction():void{
+        $content = $this->model->GetUserCart($this->request->session('user')['id']);
+        $total_amount = $this->GetTotalAmount($content);
+        print_r($content);
+        exit();
     }
 }

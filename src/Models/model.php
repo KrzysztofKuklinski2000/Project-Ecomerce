@@ -72,6 +72,7 @@ class Model extends AbstractModel  {
                         cart.id, 
                         cart.quantity
                     ";
+                    
             $result = $this->conn->query($sql);
             return $result->fetchAll(PDO::FETCH_ASSOC);
         

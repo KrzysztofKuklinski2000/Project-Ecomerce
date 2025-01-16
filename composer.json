@@ -4,7 +4,9 @@
     "type": "project",
     "license": "MIT",
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "stripe/stripe-php": "^16.4"
+    },
     "autoload": {
         "psr-4": {
             "App\\":"src/"
