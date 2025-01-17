@@ -1,0 +1,1 @@
+<h1>Płatność powiodła się</h1>

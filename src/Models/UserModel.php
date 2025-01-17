@@ -105,4 +105,55 @@ class UserModel extends AbstractModel {
             throw new Exception("Nie udało się usunąć elementu z koszyka");
         }
     }
+
+    public function AddAddress(array $data): string {
+        try {
+            $city = $this->conn->quote($data['city']);
+            $street = $this->conn->quote($data['street']);
+            $postal_code = $this->conn->quote($data['postal_code']);
+            $building_number = $this->conn->quote($data['building_number']);
+            $firstname = $this->conn->quote($data['firstname']);
+            $lastname = $this->conn->quote($data['lastname']);
+            
+
+            $sql = "INSERT INTO adress(city, street, postal_code, building_number, firstname, lastname, user_id) VALUES($city, $street, $postal_code, $building_number, $firstname, $lastname, '$data[userId]')";
+            $this->conn->exec($sql);
+            return $this->conn->lastInsertId();
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się dodać adresu");
+        }
+    }
+
+    public function CreateOrder(array $data): string {
+        try {
+            $sql = "INSERT INTO orders(user_id, total_price, address_id) VALUES('$data[userId]', '$data[total_amount]', '$data[addressId]')";
+            $this->conn->exec($sql);
+            return $this->conn->lastInsertId();
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się utworzyć zamównienia");
+        }
+    }
+
+    public function AddProductsToOrder(array $data, int $orderId): void {
+        try {
+            $sql = "INSERT INTO order_items(order_id, product_id, quantity, price) VALUES";
+
+            foreach($data as $product) {
+                $sql .= "('$orderId', '$product[productId]', '$product[quantity]', '$product[productPrice]'),";
+            }
+            $sql = substr($sql, 0, -1);
+            $this->conn->exec($sql);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się dodać produktów do zamówienia");
+        } 
+    }
+
+    public function updatePaymentStatus(int $orderId, string $status): void {
+        try {
+            $sql = "UPDATE orders set payment_status = '$status' WHERE id = '$orderId'";
+            $this->conn->exec($sql);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się zaktualizować");
+        }
+    }
 }

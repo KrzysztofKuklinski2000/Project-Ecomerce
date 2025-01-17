@@ -107,13 +107,75 @@ class UserController extends AbstractController {
     }
 
     public function orderAction():void{
-        $content = $this->userModel->GetUserCart($this->request->session('user')['id']);
-        $total_amount = $this->GetTotalAmount($content);
+        
+        $userId = $this->request->session('user')['id'];
 
+        $orderProducts = $this->userModel->GetUserCart($userId);
+        $total_amount = $this->GetTotalAmount($orderProducts);
+        
         if($this->request->isPost()) {
-            print_r($this->request->post);
+            $data = [
+                "city" => $this->request->post("city"),
+                "street" => $this->request->post("street"),
+                "postal_code" => $this->request->post("postal_code"),
+                "building_number" => $this->request->post("building_number"),
+                'firstname' => $this->request->post("firstname"),
+                'lastname' => $this->request->post("lastname"),
+                'userId' => $userId
+            ];
+
+            $addressId = $this->userModel->AddAddress($data);
+
+            $orderId = (int) $this->userModel->CreateOrder([
+                "total_amount" => $total_amount,
+                "addressId" => $addressId,
+                "userId" => $userId
+            ]);
+            
+            $this->userModel->AddProductsToOrder($orderProducts, $orderId);
+            $this->StripeAction($orderId);
         }
 
-        $this->view->renderView(['page' => 'order', 'content' => $content, 'total_amount' => $total_amount]);
-    }  
+        $this->view->renderView(['page' => 'order', 'content' => $orderProducts, 'total_amount' => $total_amount]);
+    }
+    
+    public function StripeAction(int $orderId): void {
+        $strips_secret_key = "sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNRTGiPvm2eeWXm1JTbr4hXiXaUi5m03D9WWkKE5jM00CtyXdIVp";
+        \Stripe\Stripe::setApiKey($strips_secret_key);
+
+        $checkout_session = \Stripe\Checkout\Session::create([
+            "mode" => "payment",
+            "success_url" => "http://localhost/?page=success&orderId=$orderId",
+            "cancel_url" => "http://localhost/?page=fail&orderId=$orderId",
+            "locale" => "pl",
+            "line_items" => [
+                [
+                    "quantity" => 1,
+                    "price_data" => [
+                        "currency" => "pln",
+                        "unit_amount" => 2000,
+                        "product_data" => [
+                            "name" => "T-shirt"
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+
+        http_response_code(303);
+        header("Location: " . $checkout_session->url);
+    }
+
+    public function successAction(): void {
+        $orderId = (int) $this->request->get('orderId');
+        $this->userModel->updatePaymentStatus($orderId, "completed");
+        $this->view->renderView(['page' => 'success']);
+    }
+
+    public function failAction(): void {
+        $orderId = (int) $this->request->get('orderId');
+        $this->userModel->updatePaymentStatus($orderId, "cancelled");
+        $this->view->renderView(['page' => 'fail']);
+    }
 }   
