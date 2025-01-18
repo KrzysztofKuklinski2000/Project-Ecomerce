@@ -133,15 +133,20 @@ class UserController extends AbstractController {
             ]);
             
             $this->userModel->AddProductsToOrder($orderProducts, $orderId);
-            $this->StripeAction($orderId);
+            $this->StripeAction($orderId, $orderProducts);
         }
 
         $this->view->renderView(['page' => 'order', 'content' => $orderProducts, 'total_amount' => $total_amount]);
     }
     
-    public function StripeAction(int $orderId): void {
+    public function StripeAction(int $orderId, array $orderProducts): void {
         $strips_secret_key = "sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNRTGiPvm2eeWXm1JTbr4hXiXaUi5m03D9WWkKE5jM00CtyXdIVp";
         \Stripe\Stripe::setApiKey($strips_secret_key);
+        
+        $StripsProductList = [];
+        foreach($orderProducts as $orderProduct) {
+            array_push($StripsProductList ,["quantity" => (int) $orderProduct['quantity'], "price_data"=>["currency"=>"pln", "unit_amount" => (int) $orderProduct['productPrice'] * 100, "product_data" => ["name" => $orderProduct['productName']]]]);
+        }
 
         $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",
@@ -149,16 +154,7 @@ class UserController extends AbstractController {
             "cancel_url" => "http://localhost/?page=fail&orderId=$orderId",
             "locale" => "pl",
             "line_items" => [
-                [
-                    "quantity" => 1,
-                    "price_data" => [
-                        "currency" => "pln",
-                        "unit_amount" => 2000,
-                        "product_data" => [
-                            "name" => "T-shirt"
-                        ]
-                    ]
-                ]
+                $StripsProductList
             ]
         ]);
 
