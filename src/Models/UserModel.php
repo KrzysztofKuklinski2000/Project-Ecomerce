@@ -148,6 +148,21 @@ class UserModel extends AbstractModel {
         } 
     }
 
+    public function GetOrderByPaymentStatus(int $orderId): int {
+        try {
+            $Email = $this->conn->quote($status);
+            $sql = "SELECT COUNT(*) AS NumberOfUsers FROM users WHERE email = $Email";
+            
+            
+            $result = $this->conn->query($sql);
+            $result = $result->fetch(PDO::FETCH_ASSOC);
+
+            return $result['NumberOfUsers'];
+        }catch(Throwable){
+            throw new Exception("Nie ma takiego uzytkownika");
+        }
+    }
+
     public function updatePaymentStatus(int $orderId, string $status): void {
         try {
             $sql = "UPDATE orders set payment_status = '$status' WHERE id = '$orderId'";

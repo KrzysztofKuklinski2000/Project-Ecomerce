@@ -1,1 +1,0 @@
-<h1>Płatność nie powiodła się!!!</h1>

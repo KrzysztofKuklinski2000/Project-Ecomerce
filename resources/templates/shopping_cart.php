@@ -35,7 +35,7 @@
                 </div>
                 <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                   <div class="flex items-center border-gray-100">
-                    <input name="quantity<?php echo $content["id"]?>" class="quantity h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value="<?php echo $content['quantity'] ?>" min="1" />
+                    <p class="h-8 w-8 border py-2 bg-white text-center text-xs outline-none"><?php echo $content['quantity'] ?></p>
                   </div>
                   <div class="flex items-center space-x-4">
                     <p class="text-sm"><?php echo $content['productPrice'] ?>zł</p>

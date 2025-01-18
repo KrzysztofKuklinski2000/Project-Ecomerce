@@ -16,6 +16,7 @@ class UserController extends AbstractController {
 
     //Login
     public function sign_inAction():void {
+        if(!empty($this->request->session('user'))) header("Location:/?page=start");
         $error = [];
         if($this->request->hasPost()) {
             $email = $this->request->post('email');
@@ -24,7 +25,7 @@ class UserController extends AbstractController {
                 $user = $this->userModel->getUser($email);
                 if(password_verify($password, $user['password'])) {
                     $_SESSION['user'] = $user;
-                    header("Location: /?page=start");
+                    $this->view->renderView(['page' => 'start'], ["messageTop" => "Udało się zalogować"]);
                 }else {
                     $error['loginError'] = "Nie poprawne hasło";
                 }
@@ -35,6 +36,7 @@ class UserController extends AbstractController {
     }
     //Register
     public function sign_upAction(): void {
+        if(!empty($this->request->session('user'))) header("Location:/?page=start");
         if($this->request->hasPost()) {
             $password = $this->request->post('password');
             $data = [
@@ -48,7 +50,7 @@ class UserController extends AbstractController {
             if($this->checkValidation($data)) {
                 $data['password']  = password_hash($password, PASSWORD_DEFAULT);
                 $this->userModel->create($data);
-                $this->view->renderView(['page' => 'sign_in']);
+                $this->view->renderView(['page' => 'sign_in'], ['messageTop' => "Udało się załozyć konto !!!"]);
             }else {
                 $this->view->renderView(
                     ['page' => 'sign_up'], 
@@ -107,7 +109,7 @@ class UserController extends AbstractController {
     }
 
     public function orderAction():void{
-        
+        if(empty($this->request->session('user'))) header("Location: /?page=start");
         $userId = $this->request->session('user')['id'];
 
         $orderProducts = $this->userModel->GetUserCart($userId);
@@ -140,8 +142,7 @@ class UserController extends AbstractController {
     }
     
     public function StripeAction(int $orderId, array $orderProducts): void {
-        $strips_secret_key = "sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNRTGiPvm2eeWXm1JTbr4hXiXaUi5m03D9WWkKE5jM00CtyXdIVp";
-        \Stripe\Stripe::setApiKey($strips_secret_key);
+        if(empty($this->request->session('user'))) header("Location: /?page=start");
         
         $StripsProductList = [];
         foreach($orderProducts as $orderProduct) {
@@ -150,8 +151,8 @@ class UserController extends AbstractController {
 
         $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",
-            "success_url" => "http://localhost/?page=success&orderId=$orderId",
-            "cancel_url" => "http://localhost/?page=fail&orderId=$orderId",
+            "success_url" => "http://localhost/?page=success&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
+            "cancel_url" => "http://localhost/?page=fail&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
             "locale" => "pl",
             "line_items" => [
                 $StripsProductList
@@ -164,14 +165,28 @@ class UserController extends AbstractController {
     }
 
     public function successAction(): void {
-        $orderId = (int) $this->request->get('orderId');
-        $this->userModel->updatePaymentStatus($orderId, "completed");
-        $this->view->renderView(['page' => 'success']);
+        if(empty($this->request->session('user'))) header("Location: /?page=start");
+
+        $sessionId = $this->request->get("session_id");
+        $session = \Stripe\Checkout\Session::retrieve($sessionId);
+        
+        if($session->payment_status === 'paid'){
+            $orderId = (int) $this->request->get('orderId');
+            $this->userModel->updatePaymentStatus($orderId, "completed");
+            $this->view->renderView(['page' => 'start'], ["messageTop" => "Twoje zamówienie zostało opłacone"]);
+        }
     }
 
     public function failAction(): void {
-        $orderId = (int) $this->request->get('orderId');
-        $this->userModel->updatePaymentStatus($orderId, "cancelled");
-        $this->view->renderView(['page' => 'fail']);
+        if(empty($this->request->session('user'))) header("Location: /?page=start");
+
+        $sessionId = $this->request->get("session_id");
+        $session = \Stripe\Checkout\Session::retrieve($sessionId);
+
+        if($session->payment_status !== 'paid'){
+            $orderId = (int) $this->request->get('orderId');
+            $this->userModel->updatePaymentStatus($orderId, "cancelled");
+            $this->view->renderView(['page' => 'start'], ["messageTop" => "Transakcja nie powiodła się"]);
+        }
     }
 }   
