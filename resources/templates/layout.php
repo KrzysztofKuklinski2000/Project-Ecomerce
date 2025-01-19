@@ -37,6 +37,7 @@
         
         <?php $params['page'] == 'start' ? include_once "components/header.php" : ''?>
         <?php $params['page'] == 'start' ? include_once "components/category.php" : ''?>
+        
     </header>
     
     <main>

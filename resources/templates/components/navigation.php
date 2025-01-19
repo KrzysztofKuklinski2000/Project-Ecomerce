@@ -76,7 +76,6 @@
     })
 
     openElement.addEventListener("click", ()=>{
-        console.log("siema")
         menuElement.classList.remove("hidden")
     })
 </script>

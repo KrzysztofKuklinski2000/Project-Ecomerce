@@ -173,13 +173,13 @@ class UserController extends AbstractController {
         if($session->payment_status === 'paid'){
             $orderId = (int) $this->request->get('orderId');
             $this->userModel->updatePaymentStatus($orderId, "completed");
+            
             $this->view->renderView(['page' => 'start'], ["messageTop" => "Twoje zamówienie zostało opłacone"]);
-        }
+        }      
     }
 
     public function failAction(): void {
         if(empty($this->request->session('user'))) header("Location: /?page=start");
-
         $sessionId = $this->request->get("session_id");
         $session = \Stripe\Checkout\Session::retrieve($sessionId);
 

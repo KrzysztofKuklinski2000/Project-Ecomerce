@@ -17,6 +17,12 @@ use App\Request;
 // Uruchomienie kontrolera
 $config  = require_once('config/config.php');
 
-AbstractController::initConfiguration($config);
-$request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
-(new StoreController($request))->run();
+try {
+    AbstractController::initConfiguration($config);
+    $request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
+    (new StoreController($request))->run();
+}catch(Exception $e) {
+    echo $e->getMessage();
+}catch(\Throwable $e) {
+    echo $e->getMessage();
+}
