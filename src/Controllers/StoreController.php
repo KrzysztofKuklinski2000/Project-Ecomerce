@@ -6,8 +6,16 @@ use App\Views\view;
 use App\Request;
 use App\Models\Model;
 use App\Models\UserModel;
+use App\Services\StripeService;
 
 class StoreController extends AbstractController {
+
+    private StripeService $stripe;
+
+    public function __construct(Request $request) {
+        parent::__construct($request);
+        $this->stripe = new StripeService("sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNRTGiPvm2eeWXm1JTbr4hXiXaUi5m03D9WWkKE5jM00CtyXdIVp");
+    }
     
     public function startAction(): void {
         $this->view->renderView(['page' => 'start']);
@@ -126,28 +134,18 @@ class StoreController extends AbstractController {
             ]]]);
         }
 
-        $checkout_session = \Stripe\Checkout\Session::create([
-            "mode" => "payment",
-            "success_url" => "http://localhost/?page=success&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
-            "cancel_url" => "http://localhost/?page=fail&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
-            "locale" => "pl",
-            "line_items" => [
-                $StripsProductList
-            ]
-        ]);
-
+        $url = $this->stripe->createPayment($StripsProductList, $orderId);
 
         http_response_code(303);
-        header("Location: " . $checkout_session->url);
+        header("Location: " . $url);
     }
 
     public function successAction(): void {
         if(empty($this->request->session('user'))) header("Location: /?page=start");
 
         $sessionId = $this->request->get("session_id");
-        $session = \Stripe\Checkout\Session::retrieve($sessionId);
         
-        if($session->payment_status === 'paid'){
+        if($this->stripe->paymentStatus($sessionId) === 'paid'){
             $orderId = (int) $this->request->get('orderId');
             $this->userModel->updatePaymentStatus($orderId, "completed");
             
@@ -158,11 +156,11 @@ class StoreController extends AbstractController {
     public function failAction(): void {
         if(empty($this->request->session('user'))) header("Location: /?page=start");
         $sessionId = $this->request->get("session_id");
-        $session = \Stripe\Checkout\Session::retrieve($sessionId);
 
-        if($session->payment_status !== 'paid'){
+        if($this->stripe->paymentStatus($sessionId) !== 'paid'){
             $orderId = (int) $this->request->get('orderId');
             $this->userModel->updatePaymentStatus($orderId, "cancelled");
+            
             $this->view->renderView(['page' => 'start'], ["messageTop" => "Transakcja nie powiodła się"]);
         }
     }
