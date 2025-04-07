@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+use App\Controllers\DashboardController;
 require __DIR__ . '/vendor/autoload.php';
 
 
@@ -20,7 +21,20 @@ $config  = require_once('config/config.php');
 try {
     AbstractController::initConfiguration($config);
     $request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
-    (new StoreController($request))->run();
+
+    switch($request->get('page')) {
+        case 'sign_up':
+        case 'sign_in':
+        case 'logout':
+            (new UserController($request))->run();
+        break;
+        case 'dashboard': 
+            (new DashboardController($request))->run();
+        default: 
+            (new StoreController($request))->run();
+        break;
+    }
+    
 }catch(Exception $e) {
     echo $e->getMessage();
 }catch(\Throwable $e) {

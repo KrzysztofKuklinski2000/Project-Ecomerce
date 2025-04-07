@@ -1,7 +1,7 @@
 <?php 
 $content = $params['content'];
 ?>
-
+<!-- siema -->
 <section class="relative">
         <div class="w-full mx-auto py-5 px-4 sm:px-6 lg:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2 ">

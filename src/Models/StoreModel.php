@@ -30,7 +30,9 @@ class StoreModel extends AbstractModel  {
 
     public function GetProductDetails(int $id): array {
         try {
-            $sql = "SELECT products.id, products.name, products.image_url, products.size, products.description, products.price,products.stock, categories.name AS categoryName
+            $sql = "SELECT products.id, products.name, products.image_url, 
+            products.size, products.description, products.price,products.stock, categories.name 
+            AS categoryName
             FROM products 
             LEFT JOIN categories ON products.category_id = categories.id
             WHERE products.id = $id";

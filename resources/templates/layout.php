@@ -20,6 +20,9 @@
 
     </style>
 </head>
+
+<!-- To jest kometarz  -->
+ 
 <body>
     <header>
        <?php if($message['messageTop'] ?? null): ?>

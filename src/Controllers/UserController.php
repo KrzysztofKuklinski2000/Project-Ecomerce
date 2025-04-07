@@ -25,7 +25,8 @@ class UserController extends AbstractController {
                 $user = $this->userModel->getUser($email);
                 if(password_verify($password, $user['password'])) {
                     $_SESSION['user'] = $user;
-                    $this->view->renderView(['page' => 'start'], ["messageTop" => "Udało się zalogować"]);
+                    $this->view->renderView(['page' => 'start'],
+                     ["messageTop" => "Udało się zalogować"]);
                 }else {
                     $error['loginError'] = "Nie poprawne hasło";
                 }
@@ -50,7 +51,8 @@ class UserController extends AbstractController {
             if($this->checkValidation($data)) {
                 $data['password']  = password_hash($password, PASSWORD_DEFAULT);
                 $this->userModel->create($data);
-                $this->view->renderView(['page' => 'sign_in'], ['messageTop' => "Udało się załozyć konto !!!"]);
+                $this->view->renderView(['page' => 'sign_in'],
+                 ['messageTop' => "Udało się załozyć konto !!!"]);
             }else {
                 $this->view->renderView(
                     ['page' => 'sign_up'], 
@@ -58,7 +60,8 @@ class UserController extends AbstractController {
                         'username' => $this->validator->username($data['username']),
                         'email' => $this->validator->email($data['email']),
                         'password' => $this->validator->checkPassword($password),
-                        'confirm_password' => $this->validator->confirmPassword($password, $data['confirm_password']),
+                        'confirm_password' => $this->validator->confirmPassword($password, 
+                        $data['confirm_password']),
                         'userExist' => $this->validator->userExist($data['numberOfUsers'])
                     ]
                 );
@@ -67,126 +70,8 @@ class UserController extends AbstractController {
 
         $this->view->renderView(['page' => 'sign_up']);
     }
-
     public function logoutAction(): void {
         session_destroy();
         header("Location: /?page=start");
     }  
-
-    public function shopping_cartAction(): void {
-        if(empty($this->request->session('user'))) header("Location:/?page=start");
-        $userId = $this->request->session('user')['id'];
-        if($this->request->isPost()) {
-            $cartId = (int) $this->request->post("cartId");
-            $this->userModel->DeleteProductFromCart($cartId);
-        }
-
-        $content = $this->userModel->GetUserCart($userId);
-        $total_amount = $this->GetTotalAmount($content);
-
-        $this->view->renderView(['page' => 'shopping_cart', 'content' => $content, 'total_amount' => $total_amount]);
-    }
-
-    public function GetTotalAmount(array $content): float {
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
-        $total_amount = 0;
-        foreach($content as $el) {
-            $total_amount += $el['total_amount'];
-        }
-        return $total_amount;
-    }
-
-    public function AddProductToCart(int $quantity = 1) {
-            if(empty($this->request->session('user'))) header("Location: /?page=products");
-            $productId = $this->request->post("product_id");
-            if($quantity == 0) $quantity = 1; 
-            $data = [
-                'userId' => $this->request->session('user')['id'],
-                'productId' => $productId,
-                'quantity' => $quantity
-            ];
-            $this->userModel->AddProductToCart($data);
-    }
-
-    public function orderAction():void{
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
-        $userId = $this->request->session('user')['id'];
-
-        $orderProducts = $this->userModel->GetUserCart($userId);
-        $total_amount = $this->GetTotalAmount($orderProducts);
-        
-        if($this->request->isPost()) {
-            $data = [
-                "city" => $this->request->post("city"),
-                "street" => $this->request->post("street"),
-                "postal_code" => $this->request->post("postal_code"),
-                "building_number" => $this->request->post("building_number"),
-                'firstname' => $this->request->post("firstname"),
-                'lastname' => $this->request->post("lastname"),
-                'userId' => $userId
-            ];
-
-            $addressId = $this->userModel->AddAddress($data);
-
-            $orderId = (int) $this->userModel->CreateOrder([
-                "total_amount" => $total_amount,
-                "addressId" => $addressId,
-                "userId" => $userId
-            ]);
-            
-            $this->userModel->AddProductsToOrder($orderProducts, $orderId);
-            $this->StripeAction($orderId, $orderProducts);
-        }
-
-        $this->view->renderView(['page' => 'order', 'content' => $orderProducts, 'total_amount' => $total_amount]);
-    }
-    
-    public function StripeAction(int $orderId, array $orderProducts): void {
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
-        
-        $StripsProductList = [];
-        foreach($orderProducts as $orderProduct) {
-            array_push($StripsProductList ,["quantity" => (int) $orderProduct['quantity'], "price_data"=>["currency"=>"pln", "unit_amount" => (int) $orderProduct['productPrice'] * 100, "product_data" => ["name" => $orderProduct['productName']]]]);
-        }
-
-        $checkout_session = \Stripe\Checkout\Session::create([
-            "mode" => "payment",
-            "success_url" => "http://localhost/?page=success&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
-            "cancel_url" => "http://localhost/?page=fail&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
-            "locale" => "pl",
-            "line_items" => [
-                $StripsProductList
-            ]
-        ]);
-
-
-        http_response_code(303);
-        header("Location: " . $checkout_session->url);
-    }
-
-    public function successAction(): void {
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
-
-        $sessionId = $this->request->get("session_id");
-        $session = \Stripe\Checkout\Session::retrieve($sessionId);
-        
-        if($session->payment_status === 'paid'){
-            $orderId = (int) $this->request->get('orderId');
-            $this->userModel->updatePaymentStatus($orderId, "completed");
-            
-            $this->view->renderView(['page' => 'start'], ["messageTop" => "Twoje zamówienie zostało opłacone"]);
-        }      
-    }
-
-    public function failAction(): void {
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
-        $sessionId = $this->request->get("session_id");
-        $session = \Stripe\Checkout\Session::retrieve($sessionId);
-
-        if($session->payment_status !== 'paid'){
-            $orderId = (int) $this->request->get('orderId');
-            $this->userModel->updatePaymentStatus($orderId, "cancelled");
-            $this->view->renderView(['page' => 'start'], ["messageTop" => "Transakcja nie powiodła się"]);
-        }
-    }
 }   

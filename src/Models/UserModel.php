@@ -88,7 +88,8 @@ class UserModel extends AbstractModel {
     public function AddProductToCart(array $cartData): void {
         try {
 
-            $sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES('$cartData[userId]', '$cartData[productId]', '$cartData[quantity]')";
+            $sql = "INSERT INTO cart (user_id, product_id, quantity) 
+            VALUES('$cartData[userId]', '$cartData[productId]', '$cartData[quantity]')";
             $this->conn->exec($sql);
         }catch(Throwable $e) {
             throw new Exception("Nie udało się dodać produktu do koszyka"); 
@@ -126,7 +127,8 @@ class UserModel extends AbstractModel {
 
     public function CreateOrder(array $data): string {
         try {
-            $sql = "INSERT INTO orders(user_id, total_price, address_id) VALUES('$data[userId]', '$data[total_amount]', '$data[addressId]')";
+            $sql = "INSERT INTO orders(user_id, total_price, address_id) 
+            VALUES('$data[userId]', '$data[total_amount]', '$data[addressId]')";
             $this->conn->exec($sql);
             return $this->conn->lastInsertId();
         }catch(Throwable $e) {
@@ -148,20 +150,20 @@ class UserModel extends AbstractModel {
         } 
     }
 
-    public function GetOrderByPaymentStatus(int $orderId): int {
-        try {
-            $Email = $this->conn->quote($status);
-            $sql = "SELECT COUNT(*) AS NumberOfUsers FROM users WHERE email = $Email";
+    // public function GetOrderByPaymentStatus(int $orderId): int {
+    //     try {
+    //         $Email = $this->conn->quote($status);
+    //         $sql = "SELECT COUNT(*) AS NumberOfUsers FROM users WHERE email = $Email";
             
             
-            $result = $this->conn->query($sql);
-            $result = $result->fetch(PDO::FETCH_ASSOC);
+    //         $result = $this->conn->query($sql);
+    //         $result = $result->fetch(PDO::FETCH_ASSOC);
 
-            return $result['NumberOfUsers'];
-        }catch(Throwable){
-            throw new Exception("Nie ma takiego uzytkownika");
-        }
-    }
+    //         return $result['NumberOfUsers'];
+    //     }catch(Throwable){
+    //         throw new Exception("Nie ma takiego uzytkownika");
+    //     }
+    // }
 
     public function updatePaymentStatus(int $orderId, string $status): void {
         try {
