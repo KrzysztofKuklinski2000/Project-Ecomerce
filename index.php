@@ -21,20 +21,21 @@ $config  = require_once('config/config.php');
 try {
     AbstractController::initConfiguration($config);
     $request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
+    if($request->get('module') === "dashboard"){
+        (new DashboardController($request))->run();
+    }else {
+        switch($request->get('page')) {
+            case 'sign_up':
+            case 'sign_in':
+            case 'logout':
+                (new UserController($request))->run();
+            break;
+            default: 
+                (new StoreController($request))->run();
+            break;
+        }
+    } 
 
-    switch($request->get('page')) {
-        case 'sign_up':
-        case 'sign_in':
-        case 'logout':
-            (new UserController($request))->run();
-        break;
-        case 'dashboard': 
-            (new DashboardController($request))->run();
-        default: 
-            (new StoreController($request))->run();
-        break;
-    }
-    
 }catch(Exception $e) {
     echo $e->getMessage();
 }catch(\Throwable $e) {

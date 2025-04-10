@@ -146,10 +146,7 @@ class StoreController extends AbstractController {
         $sessionId = $this->request->get("session_id");
         
         if($this->stripe->paymentStatus($sessionId) === 'paid'){
-            $orderId = (int) $this->request->get('orderId');
-            $this->userModel->updatePaymentStatus($orderId, "completed");
-            
-            $this->view->renderView(['page' => 'start'], ["messageTop" => "Twoje zamówienie zostało opłacone"]);
+            $this->afterPayment("completed", "Twoje zamówienie zostało opłacone");
         }      
     }
 
@@ -158,10 +155,13 @@ class StoreController extends AbstractController {
         $sessionId = $this->request->get("session_id");
 
         if($this->stripe->paymentStatus($sessionId) !== 'paid'){
-            $orderId = (int) $this->request->get('orderId');
-            $this->userModel->updatePaymentStatus($orderId, "cancelled");
-            
-            $this->view->renderView(['page' => 'start'], ["messageTop" => "Transakcja nie powiodła się"]);
+            $this->afterPayment("cancelled", "Transakcja nie powiodła się");
         }
+    }
+
+    private function afterPayment(string $paymentStatus, string $message):void {
+        $orderId = (int) $this->request->get('orderId');
+        $this->userModel->updatePaymentStatus($orderId, $paymentStatus);
+        $this->view->renderView(['page' => 'start'], ["messageTop" => $message]);
     }
 }

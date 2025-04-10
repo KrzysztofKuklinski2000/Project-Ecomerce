@@ -21,7 +21,7 @@ class StripeService {
         return $checkout_session->url;
     }
 
-    public function paymentStatus(string $sessionId):string {
+    public function paymentStatus(?string $sessionId):string {
         return \Stripe\Checkout\Session::retrieve($sessionId)->payment_status;
     }
 }
