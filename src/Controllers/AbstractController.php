@@ -16,7 +16,7 @@ abstract class AbstractController {
     public StoreModel $model;
     public UserModel $userModel;
     public Validator $validator;
-    private static array $configuration = [];
+    protected static array $configuration = [];
 
     public static function initConfiguration(array $configuration) {
         self::$configuration = $configuration;
