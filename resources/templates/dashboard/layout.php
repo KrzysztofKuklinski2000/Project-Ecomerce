@@ -21,7 +21,6 @@
     </style>
 </head>
 <body class="text-gray-800 font-inter">
-    <!--sidenav -->
     <div class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
         <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
 
@@ -36,14 +35,14 @@
                 </a>
             </li>
             <li class="mb-1 group">
-                <a href="?module=dashboard&page=users" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="?module=dashboard" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class="fa-solid fa-user mr-3 text-lg"></i>   
                     <span class="text-sm">Użytkownik</span>
                 </a>
             </li>
             <span class="text-gray-400 font-bold">Strony</span>
             <li class="mb-1 group">
-                <a href="?module=dashboard&page=products" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="?module=product" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class='fa-solid fa-image mr-3 text-lg' ></i>              
                     <span class="text-sm">Produkty</span>
                 </a>
@@ -76,10 +75,8 @@
         </ul>
     </div>
     <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
-    <!-- end sidenav -->
 
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-        <!-- navbar -->
         <div class="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
             <button type="button" class="text-lg text-gray-900 font-semibold sidebar-toggle">
                 <i class="ri-menu-line"></i>
@@ -117,16 +114,13 @@
                 </li>
             </ul>
         </div>
-        <!-- end navbar -->
-
-      <!-- Content -->
         <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                     <div class="flex justify-between mb-6">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">2</div>
+                                <div class="text-2xl font-semibold">3</div>
                             </div>
                             <div class="text-sm font-medium text-gray-400">Użytkownik</div>
                         </div>
@@ -138,7 +132,7 @@
                     <div class="flex justify-between mb-4">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">100</div>
+                                <div class="text-2xl font-semibold">8</div>
                                 <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">+30%</div>
                             </div>
                             <div class="text-sm font-medium text-gray-400">Zamówienia</div>
@@ -149,7 +143,7 @@
                 <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">100</div>
+                            <div class="text-2xl font-semibold mb-1">7</div>
                             <div class="text-sm font-medium text-gray-400">Produkty</div>
                         </div> 
                     </div>
@@ -157,10 +151,9 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-6 mb-6">
-                <?php require_once $params['page'].".php"; ?>
+                <?php require_once $params['page']; ?>
             </div>
         </div>
-      <!-- End Content -->
     </main>
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>

@@ -4,6 +4,6 @@ namespace App\Views;
 
 class view {
     function renderView(array $params, array $message = null) {
-        require_once("resources/templates/layout.php");
+        require_once("resources/templates/store/layout.php");
     }
 }

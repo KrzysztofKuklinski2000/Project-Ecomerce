@@ -57,11 +57,26 @@
                                 <?php echo $data['total_price'] ?>
                             </td>
                             <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-                                <?php echo $data['payment_status'] ?>
+                                <span class="font-medium m-auto block w-[70px] p-1 
+                                <?php
+                                    if($data['payment_status'] === 'completed'){
+                                        echo "bg-emerald-500";
+                                    }elseif($data['payment_status'] === 'cancelled'){
+                                        echo "bg-amber-500";
+                                    }else {
+                                        echo "bg-red-500";
+                                    }
+                                ?>
+                                "><?php echo $data['payment_status'] ?></span>
                             </td>
                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 <i class="fa-solid fa-clock text-emerald-500 mr-4"></i>
                                 <?php echo $data['created_at'] ?>
+                            </td>
+                            <td class="flex gap-2 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-lg">
+                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-pencil"></i></a>
+                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-eye"></i></a>
+                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-minus"></i></a>
                             </td>
                         </tr>
                     <?php endforeach ?>

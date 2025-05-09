@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App;
 
 class Request {
-    private array $get = [];
+    public array $get = [];
     public array $post = [];
     private array $server = [];
     public array $session = [];

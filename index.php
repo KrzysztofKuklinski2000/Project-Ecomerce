@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 use App\Controllers\DashboardController;
 require __DIR__ . '/vendor/autoload.php';
 
@@ -10,18 +12,28 @@ $strips_secret_key = "sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNR
 
 use App\Controllers\StoreController;
 use App\Controllers\UserController;
+use App\Controllers\ProductController;
 use App\Controllers\AbstractController;
 use App\Request;
 
 
 $config  = require_once('config/config.php');
-
 // Uruchomienie kontrolera
 try {
     AbstractController::initConfiguration($config);
     $request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
-    if($request->get('module') === "dashboard"){
-        (new DashboardController($request))->run();
+    if($request->get('module')){
+        switch($request->get('module')){
+            case "dashboard":
+                (new DashboardController($request))->run();
+            break;
+            case "product": 
+                (new ProductController($request))->run();
+            break;
+            default:
+                (new StoreController($request))->run();
+            break;
+        }
     }else {
         switch($request->get('page')) {
             case 'sign_up':

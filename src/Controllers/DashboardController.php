@@ -2,20 +2,7 @@
 declare(strict_types=1);
 namespace App\Controllers;
 
-use App\Models\DashboardModel;
-use App\Request;
-use App\Views\DashboardView;
-
-class DashboardController extends AbstractController{
-    public DashboardView $dashboardView;
-    public DashboardModel $dashboardModel;
-
-    public function __construct(Request $request) {
-        parent::__construct($request);
-        $this->dashboardView = new DashboardView();
-        $this->dashboardModel = new DashboardModel(self::$configuration['db']);
-    }
-
+class DashboardController extends AbstractDashboardController{
     public function startAction(): void {
         $this->dashboardView->renderView([
             'page' => 'start',

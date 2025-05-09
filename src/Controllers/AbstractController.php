@@ -42,11 +42,16 @@ abstract class AbstractController {
             }
             $this->$page();
        }catch(Exception $e) {
-            $this->startAction();
+            // $this->startAction();
+            echo $e->getMessage();
        }
     }
     
     public function page(): string {
         return $this->request->get('page', self::DEFAULT_PAGE);
+    }
+
+    public function startAction():void {
+        $this->view->renderView(['page' => 'start']);
     }
 }

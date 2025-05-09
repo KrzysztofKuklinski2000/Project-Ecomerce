@@ -2,12 +2,6 @@
 declare(strict_types=1);
 namespace App\Controllers;
 
-use App\Views\view;
-use App\Request;
-use App\Models\StoreModel;
-use App\Models\UserModel;
-use App\Validator;
-
 class UserController extends AbstractController {
 
     private function checkValidation(array $data): bool{
