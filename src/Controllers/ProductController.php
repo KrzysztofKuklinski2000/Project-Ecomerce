@@ -55,6 +55,16 @@ class ProductController extends AbstractDashboardController {
         ]);
     }
 
+    public function deleteAction(): void {
+        if($this->request->isPost()){
+            $id = (int) $this->request->post('id');
+            $this->dashboardModel->deleteProduct($id);
+            header('location: /?module=product');
+        }else {
+            header('location: /?module=product');
+        }
+    }
+
     private function takeProductData(): array {
         return [
             'id' => $this->request->post('id') ?? null,

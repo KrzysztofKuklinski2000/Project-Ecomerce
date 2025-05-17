@@ -125,4 +125,13 @@ class DashboardModel extends AbstractModel {
         throw new Exception("Nie udało się zaktualizować danych". $e->getMessage());
        }
     }
+
+    public function deleteProduct(int $id): void {
+        try {
+            $sql = "DELETE FROM products WHERE id = $id LIMIT 1";
+            $this->conn->exec($sql);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się usunąć notatki");
+        }
+    }
 }

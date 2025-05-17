@@ -17,13 +17,13 @@ class DashboardController extends AbstractDashboardController{
         ]);
     }
 
-    public function productsAction(): void {
-        $this->dashboardView->renderView([
-            'page' => 'products',
-            'data' => $this->dashboardModel->getData("products"),
+    // public function productsAction(): void {
+    //     $this->dashboardView->renderView([
+    //         'page' => 'products',
+    //         'data' => $this->dashboardModel->getData("products"),
 
-        ]);
-    }
+    //     ]);
+    // }
 
     public function ordersAction(): void {
         $this->dashboardView->renderView([

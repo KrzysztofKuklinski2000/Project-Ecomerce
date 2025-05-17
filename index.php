@@ -14,6 +14,7 @@ use App\Controllers\StoreController;
 use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\AbstractController;
+use App\Controllers\OrderController;
 use App\Request;
 
 
@@ -29,6 +30,9 @@ try {
             break;
             case "product": 
                 (new ProductController($request))->run();
+            break;
+            case "order": 
+                (new OrderController($request))->run();
             break;
             default:
                 (new StoreController($request))->run();

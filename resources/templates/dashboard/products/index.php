@@ -59,10 +59,15 @@
                                 <i class="fa-solid fa-clock text-emerald-500 mr-4"></i>
                                 <?php echo $data['created_at'] ?>
                             </td>
-                            <td class="flex gap-2 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-lg">
+                            <td class="flex items-center gap-2 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-lg">
                                 <a href="/?module=product&page=edit&id=<?php echo $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-pencil"></i></a>
                                 <a href="/?module=product&page=show&id=<?= $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-eye"></i></a>
-                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-minus"></i></a>
+                                <form action="?module=product&page=delete" method="post">
+                                    <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                    <button type="submit">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach ?>
