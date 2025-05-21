@@ -134,4 +134,53 @@ class DashboardModel extends AbstractModel {
             throw new Exception("Nie udało się usunąć notatki");
         }
     }
+
+    public function getOrder(int $id): array {
+        $orderQuery = "SELECT o.total_price, o.status, o.created_at, o.payment_status , u.id as userId, u.name, u.email, a.* 
+                FROM orders o 
+                JOIN users u ON o.user_id = u.id
+                JOIN adress a ON o.address_id = a.id
+                WHERE o.id = :order_id";
+        
+        $orderDetailsQuery = "SELECT oi.quantity, oi.price, p.name, p.image_url, p.size 
+                FROM order_items oi
+                JOIN products p ON oi.product_id = p.id
+                WHERE oi.order_id = :order_id";
+
+        $orderResult = $this->conn->prepare($orderQuery);
+        $orderResult->execute([':order_id' => $id]);
+
+        $orderDetailsResult = $this->conn->prepare($orderDetailsQuery);
+        $orderDetailsResult->execute([':order_id' => $id]);
+
+        $orderResult =  $orderResult->fetch(PDO::FETCH_ASSOC);
+        $orderDetailsResult = $orderDetailsResult->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!$orderResult) throw new Exception("Nie znaleziono zamówienia");
+
+        return [
+            'order' => [
+                'total_price' => $orderResult['total_price'],
+                'status' => $orderResult['status'],
+                'created_at' => $orderResult['created_at'],
+                'payment_status' => $orderResult['payment_status'],
+            ],
+            'user' => [
+                'id' => $orderResult['userId'],
+                'name' => $orderResult['name'],
+                'email' => $orderResult['email']
+            ],
+            'address' => [
+                'id' => $orderResult['id'],
+                'firstname' => $orderResult['firstname'],
+                'lastname' => $orderResult['lastname'],
+                'street' => $orderResult['street'],
+                'city' => $orderResult['city'],
+                'building_number' => $orderResult['building_number'],
+                'postal_code' => $orderResult['postal_code'],
+                'user_id' => $orderResult['user_id'],
+            ],
+            'products' => $orderDetailsResult,
+        ];
+    }
 }

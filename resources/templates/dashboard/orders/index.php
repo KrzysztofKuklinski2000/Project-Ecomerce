@@ -5,11 +5,6 @@
                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 class="font-semibold text-base text-blueGray-700">Zamówienia</h3>
                 </div>
-                <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                    <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                        Nowy
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -61,7 +56,7 @@
                                 <?php
                                     if($data['payment_status'] === 'completed'){
                                         echo "bg-emerald-500";
-                                    }elseif($data['payment_status'] === 'cancelled'){
+                                    }elseif($data['payment_status'] === 'pending'){
                                         echo "bg-amber-500";
                                     }else {
                                         echo "bg-red-500";
@@ -75,7 +70,7 @@
                             </td>
                             <td class="flex gap-2 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-lg">
                                 <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-pencil"></i></a>
-                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-eye"></i></a>
+                                <a href="/?module=order&page=show&id=<?= $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-eye"></i></a>
                                 <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-minus"></i></a>
                             </td>
                         </tr>
