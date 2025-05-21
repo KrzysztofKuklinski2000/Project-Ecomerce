@@ -134,19 +134,23 @@ class StoreController extends AbstractController {
             ]]]);
         }
 
-        $url = $this->stripe->createPayment($StripsProductList, $orderId);
-
+        $session = $this->stripe->createPayment($StripsProductList, $orderId);
+        $this->userModel->updateSessionId($orderId, $session['session_id']);
         http_response_code(303);
-        header("Location: " . $url);
+        header("Location: " . $session['url']);
     }
 
     public function successAction(): void {
-        if(empty($this->request->session('user'))) header("Location: /?page=start");
+        if(empty($this->request->session('user'))) {
+            header("Location: /?page=start");
+            exit;
+        }
 
         $sessionId = $this->request->get("session_id");
         
         if($this->stripe->paymentStatus($sessionId) === 'paid'){
-            $this->afterPayment("completed", "Twoje zamówienie zostało opłacone");
+            $orderId = $this->userModel->getOrderIdBySession($sessionId);
+            $this->afterPayment($orderId, "completed", "Twoje zamówienie zostało opłacone");
         }      
     }
 
@@ -155,12 +159,12 @@ class StoreController extends AbstractController {
         $sessionId = $this->request->get("session_id");
 
         if($this->stripe->paymentStatus($sessionId) !== 'paid'){
-            $this->afterPayment("cancelled", "Transakcja nie powiodła się");
+            $orderId = $this->userModel->getOrderIdBySession($sessionId);
+            $this->afterPayment($orderId, "cancelled", "Transakcja nie powiodła się");
         }
     }
 
-    private function afterPayment(string $paymentStatus, string $message):void {
-        $orderId = (int) $this->request->get('orderId');
+    private function afterPayment(int $orderId, string $paymentStatus, string $message):void {
         $this->userModel->updatePaymentStatus($orderId, $paymentStatus);
         $this->view->renderView(['page' => 'start'], ["messageTop" => $message]);
     }

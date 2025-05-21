@@ -7,7 +7,7 @@ class StripeService {
         \Stripe\Stripe::setApiKey($apiKey);
     }
 
-    public function createPayment(array $StripsProductList, int $orderId):string{
+    public function createPayment(array $StripsProductList, int $orderId):array{
         $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",
             "success_url" => "http://localhost/?page=success&orderId=$orderId&session_id={CHECKOUT_SESSION_ID}",
@@ -18,7 +18,10 @@ class StripeService {
             ]
         ]);
 
-        return $checkout_session->url;
+        return [
+            'url' => $checkout_session->url,
+            'session_id' => $checkout_session->id
+        ];
     }
 
     public function paymentStatus(?string $sessionId):string {

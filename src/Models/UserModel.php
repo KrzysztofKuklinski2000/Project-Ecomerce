@@ -165,6 +165,26 @@ class UserModel extends AbstractModel {
     //     }
     // }
 
+    public function updateSessionId(int $orderId, string $sessionId): void {
+        try {
+            $sql = "UPDATE orders SET stripe_session_id = :sessionId WHERE id = :orderId";
+            $result = $this->conn->prepare($sql);
+            $result->execute(['sessionId' => $sessionId, 'orderId' => $orderId]);
+        } catch(Throwable $e) {
+            throw new Exception("Nie udało się zapisać session_id");
+        }
+    }
+
+    public function getOrderIdBySession(string $sessionId): int {
+        $result = $this->conn->prepare("SELECT id FROM orders WHERE stripe_session_id = :sessionId");
+        $result->execute(['sessionId' => $sessionId]);
+        $result = $result->fetch();
+        if (!$result) {
+            throw new Exception("Zamówienie nie istnieje");
+        }
+        return (int)$result['id'];
+    }
+
     public function updatePaymentStatus(int $orderId, string $status): void {
         try {
             $sql = "UPDATE orders set payment_status = '$status' WHERE id = '$orderId'";
