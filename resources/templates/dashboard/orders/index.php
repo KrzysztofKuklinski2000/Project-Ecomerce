@@ -69,9 +69,9 @@
                                 <?php echo $data['created_at'] ?>
                             </td>
                             <td class="flex gap-2 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center text-lg">
-                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-pencil"></i></a>
+                                <a href="/?module=order&page=edit&id=<?= $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-pencil"></i></a>
                                 <a href="/?module=order&page=show&id=<?= $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-eye"></i></a>
-                                <a href="" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-minus"></i></a>
+                                <a href="/?module=order&page=delete&id=<?= $data['id'] ?>" class="text-sm text-slate-700 hover:text-slate-500"><i class="fa-solid fa-minus"></i></a>
                             </td>
                         </tr>
                     <?php endforeach ?>

@@ -103,7 +103,6 @@
             <th class="p-4 text-sm font-normal leading-none text-slate-500">Ilość</th>
             <th class="p-4 text-sm font-normal leading-none text-slate-500">Cena za produkt</th>
             <th class="p-4 text-sm font-normal leading-none text-slate-500">Wartość produtków</th>
-            <th class="p-4 text-sm font-normal leading-none text-slate-500"></th>
         </tr>
         </thead>
         <tbody>
@@ -123,13 +122,6 @@
             </td>
             <td class="p-4 border-b border-slate-200 py-5">
             <p class="text-sm text-slate-500"><?= (int) $product['quantity'] * (int) $product['price'] ?></p>
-            </td>
-            <td class="p-4 border-b border-slate-200 py-5">
-            <button type="button" class="text-slate-500 hover:text-slate-700">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
             </td>
         </tr>
         <?php endforeach ?>
