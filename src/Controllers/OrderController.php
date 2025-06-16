@@ -51,6 +51,12 @@ class OrderController extends AbstractDashboardController {
         ]);
     }
 
+    public function deleteProductFromOrderAction():void {
+        $orderProductId = (int) $this->request->get('orderProduct');
+        $this->dashboardModel->deleteProductFromOrder($orderProductId);
+        header("Location: /?module=order");
+    }
+
     private function takeDataToUpadteOrder(): array {
         return [
             'order' => [

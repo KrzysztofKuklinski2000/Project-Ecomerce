@@ -143,7 +143,7 @@ class DashboardModel extends AbstractModel {
                 JOIN adress a ON o.address_id = a.id
                 WHERE o.id = :order_id";
         
-            $orderDetailsQuery = "SELECT oi.quantity, oi.price, p.name, p.image_url, p.size, p.id
+            $orderDetailsQuery = "SELECT oi.id as orderItemId, oi.quantity, oi.price, p.name, p.image_url, p.size, p.id
                     FROM order_items oi
                     JOIN products p ON oi.product_id = p.id
                     WHERE oi.order_id = :order_id";
@@ -266,6 +266,46 @@ class DashboardModel extends AbstractModel {
             $this->conn->rollBack();
             throw new Exception("Nie udało się usunąć zamówienia");
         }
+    }
+
+    public function deleteProductFromOrder(int $id):void {
+        try {
+            $this->conn->beginTransaction();
+
+            $result = $this->conn->prepare("SELECT order_id, price, quantity FROM order_items WHERE id = :orderProduct");
+            $result->execute([":orderProduct" => $id]);
+            $product = $result->fetch(PDO::FETCH_ASSOC);
+
+            if(!$product){
+                throw new Exception("Produktu nie ma w zamówieniu ");
+            }
+
+            $totalPriceOfProducts = (float) $product['price'] * (int) $product['quantity'];
+            
+            $result = $this->conn->prepare("SELECT total_price FROM orders WHERE id = :orderId");
+            $result->execute([":orderId" => $product['order_id']]);
+            $totalPriceOfOrder = $result->fetchColumn();
+
+            if(!$totalPriceOfOrder) {
+                throw new Exception("Zamówienie nie istnieje");
+            }
+
+            $newTotalPriceOfOrder = max(0, (float) ($totalPriceOfOrder - $totalPriceOfProducts));
+
+            $result = $this->conn->prepare("UPDATE orders SET total_price = :newPrice WHERE id = :orderId");
+            $result->execute([
+                ":newPrice" => $newTotalPriceOfOrder, 
+                ":orderId" => $product['order_id'],
+            ]);
+
+            $result = $this->conn->prepare("DELETE FROM order_items WHERE id = :orderProductId");
+            $result->execute([':orderProductId' => $id]);
+            
+            $this->conn->commit();
+        }catch(Throwable $e) {
+            $this->conn->rollBack();
+            throw new Exception("Nie udało się usunąć produktu z zamówienia");
+        } 
     }
 
     private function countTotalPrice(array $data): float {
