@@ -308,6 +308,35 @@ class DashboardModel extends AbstractModel {
         } 
     }
 
+    public function createCategory(string $name): void {
+        try {
+            $result = $this->conn->prepare("INSERT INTO categories (name) VALUES(:name)");
+            $result->execute([":name" => $name]);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się utworzyć nowej kategorii");
+        }
+    }
+
+    public function deleteCategory(int $id):void {
+        try {
+            $result = $this->conn->prepare("DELETE FROM categories WHERE id = ?");
+            $result->execute([$id]);
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się usunąć kategorii");
+        }
+    }
+
+    public function hasProductsInCategory(int $id): bool {
+        try{
+            $result = $this->conn->prepare("SELECT COUNT(*) FROM products WHERE category_id = ? ");
+            $result->execute([$id]);
+            $count =  (int) $result->fetchColumn();
+            return $count === 0 ? false: true;
+        }catch(Throwable $e){
+            throw new Exception("Nie udało się pobrać danych");
+        }
+    }
+
     private function countTotalPrice(array $data): float {
         $productIds = array_keys($data);
         $placeholders = implode(',', array_fill(0, count($productIds), '?'));

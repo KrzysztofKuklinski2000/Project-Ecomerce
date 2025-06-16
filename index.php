@@ -15,6 +15,7 @@ use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\AbstractController;
 use App\Controllers\OrderController;
+use App\Controllers\CategoryController;
 use App\Request;
 
 
@@ -33,6 +34,9 @@ try {
             break;
             case "order": 
                 (new OrderController($request))->run();
+            break;
+            case "category": 
+                (new CategoryController($request))->run();
             break;
             default:
                 (new StoreController($request))->run();

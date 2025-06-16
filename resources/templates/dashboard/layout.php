@@ -29,13 +29,13 @@
         <ul class="mt-4">
             <span class="text-gray-400 font-bold">ADMIN</span>
             <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="/?module=dashboard" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                 <i class="fa-solid fa-house mr-3 text-lg"></i>
                     <span class="text-sm">Dashboard</span>
                 </a>
             </li>
             <li class="mb-1 group">
-                <a href="?module=dashboard" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="?module=dashboard&page=users" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class="fa-solid fa-user mr-3 text-lg"></i>   
                     <span class="text-sm">Użytkownik</span>
                 </a>
@@ -55,19 +55,7 @@
                 </a>
             </li>
             <li class="mb-1 group">
-                <a href="?module=dashboard&page=address" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class="fa-solid fa-location-dot mr-3 text-lg"></i>              
-                    <span class="text-sm">Adresy</span>
-                </a>
-            </li>
-            <li class="mb-1 group">
-                <a href="?module=dashboard&page=shoppingCart" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class="fa-solid fa-basket-shopping mr-3 text-lg"></i>              
-                    <span class="text-sm">Koszyki</span>
-                </a>
-            </li>
-            <li class="mb-1 group">
-                <a href="?module=dashboard&page=category" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="?module=category" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class="fa-solid fa-layer-group mr-3 text-lg"></i>               
                     <span class="text-sm">Kategorie</span>
                 </a>

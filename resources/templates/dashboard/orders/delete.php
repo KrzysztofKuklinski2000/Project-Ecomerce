@@ -5,7 +5,7 @@
 <!-- component -->
 <div class="w-full justify-center mx-auto my-6 flex gap-12">
 
-    <div class="w-1/2 bg-white p-3 rounded-md"
+    <div class="w-1/2 bg-white p-3 rounded-md">
         <br>
         <h1 class="text-xl">Dane Zamówienia:</h1>
         <div class="flex justify-between items-center mt-4">
