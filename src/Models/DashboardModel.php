@@ -8,6 +8,16 @@ use Exception;
 
 class DashboardModel extends AbstractModel {
 
+    public function countElements(string $table): int {
+        try {
+            $result = $this->conn->prepare("SELECT count(*) FROM $table");
+            $result->execute();
+            return (int) $result->fetchColumn();
+        }catch(Throwable $e){
+            throw new Exception("Nie udało się pobrać ilości");
+        }
+    }
+
     public function getData(string $table): array {
         try {
             $sql = "SELECT * FROM $table";
@@ -334,6 +344,37 @@ class DashboardModel extends AbstractModel {
             return $count === 0 ? false: true;
         }catch(Throwable $e){
             throw new Exception("Nie udało się pobrać danych");
+        }
+    }
+
+    public function getUserOrders(int $id): array {
+        try {
+            $orderQuery = "SELECT o.total_price, o.status, o.created_at, o.payment_status, o.id as orderId, a.firstname, a.lastname, a.street, a.city, a.building_number, a.postal_code 
+                FROM orders o 
+                JOIN adress a ON o.address_id = a.id
+                WHERE o.user_id = :user_id";
+        
+            $orderDetailsQuery = "SELECT oi.quantity, oi.price, p.name, p.image_url, p.size
+                    FROM order_items oi
+                    JOIN products p ON oi.product_id = p.id
+                    WHERE oi.order_id = :order_id";
+
+            $ordersResult = $this->conn->prepare($orderQuery);
+            $ordersResult->execute([':user_id' => $id]);
+            $orders =  $ordersResult->fetchAll(PDO::FETCH_ASSOC);
+
+            if(!$orders) return [];
+
+            $orderDetails = $this->conn->prepare($orderDetailsQuery);
+            foreach($orders as &$order) {
+                $orderDetails->execute([':order_id' => $order['orderId']]);
+                $order['products'] = $orderDetails->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+            return $orders;
+
+        }catch(Throwable $e) {
+            throw new Exception("Nie udało się pobrać zamówienia");
         }
     }
 

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-use App\Controllers\DashboardController;
 require __DIR__ . '/vendor/autoload.php';
 
 session_start();
@@ -10,12 +9,14 @@ session_start();
 $strips_secret_key = "sk_test_51Qhz5PKjqg8M9H3wK1yIiYjeDm8STwKh4UobgAehvS1GACXNRTGiPvm2eeWXm1JTbr4hXiXaUi5m03D9WWkKE5jM00CtyXdIVp";
 \Stripe\Stripe::setApiKey($strips_secret_key);
 
+use App\Controllers\DashboardController;
 use App\Controllers\StoreController;
 use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\AbstractController;
 use App\Controllers\OrderController;
 use App\Controllers\CategoryController;
+use App\Controllers\UserDashboardController;
 use App\Request;
 
 
@@ -37,6 +38,9 @@ try {
             break;
             case "category": 
                 (new CategoryController($request))->run();
+            break;
+            case "user":
+                (new UserDashboardController($request))->run();
             break;
             default:
                 (new StoreController($request))->run();

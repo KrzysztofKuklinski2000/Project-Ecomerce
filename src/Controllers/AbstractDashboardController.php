@@ -16,8 +16,14 @@ abstract class AbstractDashboardController extends AbstractBaseController {
         if(empty(self::$configuration['db'])){
             throw new Exception("Błąd Konfiguracji");
         }
+
+        if(!$this->request->session('user') || !$this->request->session('user')['is_admin']){
+            header('location: /');
+            exit;
+        }
         
-        $this->dashboardView = new DashboardView();
+        
         $this->dashboardModel = new DashboardModel(self::$configuration['db']);
+        $this->dashboardView = new DashboardView($this->dashboardModel);
     }
 }

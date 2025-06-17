@@ -19,6 +19,11 @@ class UserController extends AbstractController {
                 $user = $this->userModel->getUser($email);
                 if(password_verify($password, $user['password'])) {
                     $_SESSION['user'] = $user;
+                    if($user['is_admin']){
+                        header("Location: /?module=dashboard");
+                        exit;
+                    }
+
                     $this->view->renderView(['page' => 'start'],
                      ["messageTop" => "Udało się zalogować"]);
                 }else {

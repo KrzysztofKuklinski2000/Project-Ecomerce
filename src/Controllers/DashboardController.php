@@ -8,12 +8,4 @@ class DashboardController extends AbstractDashboardController{
             'page' => 'start/index.php',
         ]);
     }
-    
-    public function usersAction(): void {
-        
-        $this->dashboardView->renderView([
-            'page' => 'users/index.php',
-            'data' => $this->dashboardModel->getData("users"),
-        ]);
-    }
 }

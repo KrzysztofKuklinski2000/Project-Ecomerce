@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="mb-1 group">
-                <a href="?module=dashboard&page=users" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <a href="?module=user" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class="fa-solid fa-user mr-3 text-lg"></i>   
                     <span class="text-sm">Użytkownik</span>
                 </a>
@@ -108,7 +108,7 @@
                     <div class="flex justify-between mb-6">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">3</div>
+                                <div class="text-2xl font-semibold"><?= $numberOfUsers ?></div>
                             </div>
                             <div class="text-sm font-medium text-gray-400">Użytkownik</div>
                         </div>
@@ -120,7 +120,7 @@
                     <div class="flex justify-between mb-4">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">8</div>
+                                <div class="text-2xl font-semibold"><?= $numberOfOrders ?></div>
                                 <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">+30%</div>
                             </div>
                             <div class="text-sm font-medium text-gray-400">Zamówienia</div>
@@ -131,7 +131,7 @@
                 <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">7</div>
+                            <div class="text-2xl font-semibold mb-1"><?= $numberOfProducts ?></div>
                             <div class="text-sm font-medium text-gray-400">Produkty</div>
                         </div> 
                     </div>
